@@ -1,0 +1,4 @@
+%syntax-version=1.0.0
+%project=fitwork
+
+1.create_tables 2023-02-20T13:01:17Z anthalius <anthalius@Dreamer-v6> # creation des tables de la DB
