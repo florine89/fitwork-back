@@ -2,6 +2,15 @@
 
 BEGIN;
 
--- XXX Add DDLs here.
+DROP TABLE
+    IF EXISTS "article",
+    "categorie",
+    "label",
+    "role",
+    "user",
+    "favorite",
+    "program",
+    "article_has_label";
+
 
 COMMIT;
