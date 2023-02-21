@@ -2,11 +2,11 @@
 
 ## Sqitch
 
-Installez Squitch selon la méthode adaptée en suivant [ce lien](https://sqitch.org/download/) 
+Installez Squitch selon la méthode adaptée en suivant [ce lien](https://sqitch.org/download/)
 
 ## Base de donnée
 
-### au premier lancement :
+### au premier lancement
 
 dans le dossier migration executer le script init.sh
 `cd ./migration/`

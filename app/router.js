@@ -1,15 +1,16 @@
-const Router = require('express');
-// const mainController = require("./controller/userController.js");
+import Router from 'express';
+import userController from './controllers/userController.js';
 
 const router = Router();
+/**
+ * GET /api/user/{id}
+ * @summary Retourne un utilisateur
+ * @tags user
+ * @param {number} id.path - id de l'utilisateur
+ * @return {user} 200 - un utilisateur
+ * @return {object} 500 - Unexpected error
+ */
+router.get('/user/:id', userController.getUserById);
+router.post('/user', userController.createUser);
 
-// define the about route
-// router.post('/login', mainController.post);
-// router.post('/user', mainController.post);
-
-// router.get('/user/:id', mainController.get);
-// router.patch('/user/:id', mainController.update);
-// router.delete('/user/:id', mainController.delete);
-
-
-module.exports = router;
+export default router;

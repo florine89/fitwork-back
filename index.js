@@ -1,11 +1,11 @@
-require('dotenv').config();
+import {} from 'dotenv/config';
 
-const express = require('express');
+import express from 'express';
 const port = process.env.PORT || 3000;
 
 const app = express();
 
-const router = require('./app/router');
+import router from './app/router.js';
 
 app.use(router);
 
