@@ -7,9 +7,19 @@ const userController ={
             res.json(user)
         }
         else{
-            next(new Error("problème de BDD"))
+            next(new Error("problème de lecture BDD"))
         };
+    },
+    async createUser(req,res,next){
+        const user=await userModel.insert(req.body);
+        if(user){
+            res.json(user);
+        }
+        else {
+            next (new Error('problème de création sur la BDD'));
+        }
+
     }
 };
 
-export default {userController};
+export default userController;

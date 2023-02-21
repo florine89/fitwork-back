@@ -2,7 +2,15 @@ import Router from 'express';
 import userController from './controllers/userController.js';
 
 const router = Router();
-
-router.get('/user/:id', userController.getUserById)
+/**
+ * GET /api/user/{id}
+ * @summary Retourne un utilisateur
+ * @tags user
+ * @param {number} id.path - id de l'utilisateur
+ * @return {user} 200 - un utilisateur
+ * @return {object} 500 - Unexpected error
+ */
+router.get('/user/:id', userController.getUserById);
+router.post('/user', userController.createUser);
 
 export default router;
