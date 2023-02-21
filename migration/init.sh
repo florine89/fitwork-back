@@ -1,6 +1,2 @@
-export PGUSER=fitwork_admin
-dropdb fitwork
-dropuser fitwork
-
-psql -f init_db.sql -d fitwork
+psql -f init_db.sql -d postgres
 sqitch init fitwork --engine pg --target db:pg:fitwork
