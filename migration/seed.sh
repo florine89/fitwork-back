@@ -1,4 +1,3 @@
 export PGUSER=fitwork_admin
 export PGPASSWORD=fitwork
-
-sqitch revert
+psql -d fitwork -f populate.sql 
