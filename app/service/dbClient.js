@@ -1,5 +1,5 @@
-import * as pg from 'pg'; // equivalent strict à const Client=require('pg') 
-const {Client} = pg;
+import pkg from 'pg'; // equivalent strict à const Client=require('pg') 
+const { Client} = pkg;
 const client = new Client();
 client.connect();
 
