@@ -4,7 +4,7 @@ BEGIN;
 
 DROP TABLE
     IF EXISTS "article",
-    "categorie",
+    "category",
     "label",
     "role",
     "user",
