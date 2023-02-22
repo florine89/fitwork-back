@@ -30,8 +30,9 @@ const loginController={
         if (!isValidPassword){
             res.status(500).send('Mauvais email ou mot de passe')
         };
-        const token = jwt.sign({email:foundUser.email}, process.env.SESSION_SECRET);
-        res.json({token});
+        // const token = jwt.sign({email:foundUser.email}, process.env.SESSION_SECRET);
+        //res.json({token});
+        res.json({foundUser});
 }
 };
 
