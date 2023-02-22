@@ -19,6 +19,18 @@ const userController ={
             next (new Error('problème de création sur la BDD'));
         }
 
+    },
+
+    async updateUser(req,res,next){
+        const user = await userModel.selectOne(req.params.id);
+    },
+
+    async deleteUser(req,res,next){
+        const user = await userModel.selectOne(req.params.id);
+        if (user){
+            await user.destroy();
+        }
+        res.status(204).end();
     }
 };
 
