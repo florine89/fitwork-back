@@ -13,11 +13,9 @@ const userController ={
     async createUser(req,res,next){
         const user=await userModel.insert(req.body);
         if(user){
-            console.log('ici');
             res.json(user);
         }
         else {
-            console.log('oups cassé');
             next (new Error('problème de création sur la BDD'));
         }
 

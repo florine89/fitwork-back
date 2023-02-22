@@ -1,4 +1,5 @@
 import  dbClient  from"../service/dbClient.js";
+import bcrypt from "bcryptjs"
 
 export default{
  /**
@@ -30,19 +31,19 @@ export default{
      */
     async insert (user){
         let newUser;
-        const sqlQuery =`INSERT INTO "user" (firstname,lastname,email,birth_date,password,gender,role_id) VALUES ($1,$2,$3,$4,$5,$6,$7);`;
-        console.log(sqlQuery);
-        const values=[user.firstname, user.lastname,user.email,user.birth_date,user.password,user.gender,user.role_id];
-        console.log(values);
+        const saltRounds=12;
+        const hash=await bcrypt.hash(user.password,saltRounds);
+        const sqlQuery =`INSERT INTO "user" ("firstname","lastname","email","birth_date","password","gender","role_id") VALUES ($1,$2,$3,$4,$5,$6,$7);`;    
+        const values=[user.firstname, user.lastname,user.email,user.birth_date,hash,user.gender,user.role_id];
         try{
-            const response=await dbClient.query(sqlQuery,values);
-            console.log(response)
-            newUser=response.rows[0];
+            const result=await dbClient.query(sqlQuery,values);
+            console.log(result);
+            return ;
         }
         catch(error){
             console.error(error); 
         }
-        return newUser;
+        ;
     }
 
 }
