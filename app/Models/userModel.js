@@ -38,7 +38,7 @@ export default{
             newUser=response.rows[0];
         }
         catch(error){
-            console.error(error);
+            console.error(error); 
         }
         return newUser;
     }
