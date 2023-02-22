@@ -20,7 +20,6 @@ const loginController={
         // const foundUser=await dbClient.query(sqlQuery,value);
         // déconstruction du foundUser
         const { rows: [foundUser] } = await dbClient.query(sqlQuery, value);
-        console.log(foundUser.password);
         if (!foundUser){
             res.status(500).send('Mauvais email ou mot de passe')
         };
@@ -30,9 +29,10 @@ const loginController={
         if (!isValidPassword){
             res.status(500).send('Mauvais email ou mot de passe')
         };
-        // const token = jwt.sign({email:foundUser.email}, process.env.SESSION_SECRET);
-        //res.json({token});
-        res.json({foundUser});
+        const token = jwt.sign({email:foundUser.email}, process.env.SESSION_SECRET);
+
+        res.json({token});
+        // res.json({foundUser});
 }
 };
 

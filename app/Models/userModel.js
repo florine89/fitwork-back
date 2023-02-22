@@ -30,11 +30,13 @@ export default{
      */
     async insert (user){
         let newUser;
-        const sqlQuery =`INSERT INTO "user" ("firstname","lastname","email",birth_date","password","gender","role_id") 
-                         VALUES ($1,$2,$3,$4,$5,$6,$7)`;
+        const sqlQuery =`INSERT INTO "user" (firstname,lastname,email,birth_date,password,gender,role_id) VALUES ($1,$2,$3,$4,$5,$6,$7);`;
+        console.log(sqlQuery);
         const values=[user.firstname, user.lastname,user.email,user.birth_date,user.password,user.gender,user.role_id];
+        console.log(values);
         try{
             const response=await dbClient.query(sqlQuery,values);
+            console.log(response)
             newUser=response.rows[0];
         }
         catch(error){

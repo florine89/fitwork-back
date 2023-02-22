@@ -13,25 +13,17 @@ const userController ={
     async createUser(req,res,next){
         const user=await userModel.insert(req.body);
         if(user){
+            console.log('ici');
             res.json(user);
         }
         else {
+            console.log('oups cassé');
             next (new Error('problème de création sur la BDD'));
         }
 
-    },
-
-    async updateUser(req,res,next){
-        const user = await userModel.selectOne(req.params.id);
-    },
-
-    async deleteUser(req,res,next){
-        const user = await userModel.selectOne(req.params.id);
-        if (user){
-            await user.destroy();
-        }
-        res.status(204).end();
     }
+
+
 };
 
 export default userController;

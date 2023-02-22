@@ -12,8 +12,7 @@ const router = Router();
  * @return {object} 500 - Unexpected error
  */
 router.get('/user/:id', userController.getUserById);
-router.patch('/user/:id', userController.updateUser);
-router.delete('/user/:id', userController.deleteUser);
+
 
 router.post('/user', userController.createUser);
 
