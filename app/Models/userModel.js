@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs"
 
 export default{
  /**
-     * Permet de récupérer un utilisateur par son id
+     * Cherche un utilisateur par son ID (SQL)
      * @param {integer} id 
      */
     async selectOne(id){
@@ -20,7 +20,7 @@ export default{
     },
    
     /**
-     * Permet de créer un utilisateur 
+     * Gère la création d'un utilisateur (SQL)
      * @param {text} firstname
      * @param {text} lastname
      * @param {text} email
@@ -37,8 +37,7 @@ export default{
         const values=[user.firstname, user.lastname,user.email,user.birth_date,hash,user.gender,user.role_id];
         try{
             const result=await dbClient.query(sqlQuery,values);
-            console.log(result);
-            return ;
+            return result;
         }
         catch(error){
             console.error(error); 
