@@ -12,6 +12,8 @@ const router = Router();
  * @return {object} 500 - Unexpected error
  */
 router.get('/user/:id', userController.getUserById);
+
+
 router.post('/user', userController.createUser);
 
 router.post('/login', loginController.checkLogin);
