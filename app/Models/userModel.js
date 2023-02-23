@@ -41,6 +41,14 @@ export default{
             console.error(error); 
         }
         return newUser;
+    },
+
+    async update (){
+        
+        const sqlQuery = `UPDATE INTO "user"
+                            SET firstname=$1->>'firstname', lastname==$2->>'lastname', email=$3->>'email', birth_date=$4->>'birth_date', password=$5->>'password', gender=$6->>'gender'
+                            WHERE id=($7->>'id')::int; RETURNING firstname, lastname, email, birth_date, gender;`
+        const values =[body.firstname,body.lastname,body.email,body.birth_date,body.password,body.gender,userId];
     }
 
 }

@@ -23,9 +23,14 @@ const userController ={
 
     async updateUser(req,res,next){
         const user = await userModel.selectOne(req.params.id);
+        try {
+            await userModel.update(user.id,req.body);
+        } catch (err) {
+            next(err);
+        }
     },
 
-    async deleteUser(req,res,next){
+    async deleteUser(req,res,_){
         const user = await userModel.selectOne(req.params.id);
         if (user){
             await user.destroy();
