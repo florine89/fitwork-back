@@ -37,7 +37,7 @@ export default{
         const values=[user.firstname, user.lastname,user.email,user.birth_date,hash,user.gender,user.role_id];
         try{
             const result=await dbClient.query(sqlQuery,values);
-            return result;
+            return 'ok';
         }
         catch(error){
             console.error(error); 
