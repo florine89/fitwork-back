@@ -2,3 +2,4 @@
 %project=fitwork
 
 1.create_tables 2023-02-20T13:01:17Z anthalius <anthalius@Dreamer-v6> # creation des tables de la DB
+2.alter_mail 2023-02-24T08:36:17Z Anthalius <Anthalius@Mortefleur> # altering user.mail to add unique constraint
