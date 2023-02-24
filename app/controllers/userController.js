@@ -31,11 +31,14 @@ const userController ={
     },
 
     async deleteUser(req,res,_){
-        const user = await userModel.selectOne(req.params.id);
-        if (user){
-            await user.destroy();
+        const user = await userModel.deleteOne(req.params.id);
+        if(!user){
+            res.json('done');
         }
-        res.status(204).end();
+        else {
+            next (new Error('problème de suppression de l\'utilisateur sur la BDD'));
+        }
+
     }
 };
 
