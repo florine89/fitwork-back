@@ -11,7 +11,6 @@ export default{
         const sqlQuery= `SELECT * FROM "user" WHERE id=$1;`;
         const value= [id];
     try {
-        console.log('ici');
         const response = await dbClient.query (sqlQuery,value);
         result = response.rows[0];
     } 
