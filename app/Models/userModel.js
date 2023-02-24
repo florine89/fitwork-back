@@ -26,15 +26,14 @@ export default{
      * @param {text} email
      * @param {date} birth_date
      * @param {text} password
-     * @param {text} gender
      * @param {integer} role_id
      */
     async insert (user){
         const saltRounds=12;
         const hash=await bcrypt.hash(user.password,saltRounds);
         //user.password=NULL;
-        const sqlQuery =`INSERT INTO "user" ("firstname","lastname","email","birth_date","password","gender","role_id") VALUES ($1,$2,$3,$4,$5,$6,$7);`;    
-        const values=[user.firstname, user.lastname,user.email,user.birth_date,hash,user.gender,user.role_id];
+        const sqlQuery =`INSERT INTO "user" ("firstname","lastname","email","birth_date","password","role_id") VALUES ($1,$2,$3,$4,$5,$6);`;    
+        const values=[user.firstname, user.lastname,user.email,user.birth_date,hash,user.role_id];
         try{
             await dbClient.query(sqlQuery,values);
             return 'ok';
