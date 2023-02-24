@@ -23,10 +23,14 @@ const userController ={
 
     async updateUser(req,res,next){
         const user = await userModel.selectOne(req.params.id);
-        try {
-            await userModel.update(user.id,req.body);
-        } catch (err) {
-            next(err);
+        if(user){
+            try {
+                const updateUser = await userModel.update(user.id,req.body);
+                res.json(updateUser)
+            } catch (err) {
+                next(err);
+        }}else {
+            next (new Error('problèmer de connection a la BDD'));
         }
     },
 
