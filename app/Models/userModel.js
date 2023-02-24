@@ -48,9 +48,12 @@ export default{
 
     async update (userId, body){
         console.log('dans le model/update');
-        const sqlQuery = `UPDATE "user"
-                            SET firstname=$1->>'firstname', lastname=$2->>'lastname', email=$3->>'email', birth_date=$4->>'birth_date'
-                            WHERE id=$5::int RETURNING (firstname,lastname,email,birth_date);`
+        const sqlQuery = `UPDATE "user" SET
+                        "firstname" = COALESCE($1, firstname),
+                        "lastname" = COALESCE($2, lastname),
+                        "email" = COALESCE($3, email),
+                        "birth_date" = COALESCE($4, birth_date)
+                        WHERE id=$5::int RETURNING (firstname,lastname,email,birth_date);`
         const values =[body.firstname,body.lastname,body.email,body.birth_date,userId];
         try {
             console.log('dans le try du model/update');
