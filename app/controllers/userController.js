@@ -30,7 +30,8 @@ const userController ={
         }
     },
 
-    async deleteUser(req,res,_){
+    async deleteUser(req,res,next){
+        console.log('dans le controleur/deleteUSer');
         const user = await userModel.deleteOne(req.params.id);
         if(!user){
             res.json('done');
