@@ -26,7 +26,8 @@ const loginController={
             res.status(500).send('Email ou mot de passe incorrect')
         };
         const token = jwt.sign({email:foundUser.email}, process.env.SESSION_SECRET);
-        res.json({token});
+        const firstname=foundUser.firstname
+        res.json({logged:true,firstname,token});
 }
 };
 
