@@ -14,7 +14,7 @@ VALUES ('salutations'),('étirement');
 -- ---------------------------------------------------------------------
 INSERT INTO
     "role"("label")
-VALUES ('member'), ('admin');
+VALUES ('admin'), ('member');
 -- ---------------------------------------------------------------------
 INSERT INTO
     "user"(
@@ -26,7 +26,7 @@ INSERT INTO
         "gender",
         "role_id"
     )
-VALUES ('Jon','Sérien','j.serien@idiot.com','1985/05/23','$2y$10$zDrsxe6uhYIybLJ1ka.aLOEcR7iDa8gF0r0Opatu.C9J1auQ8EEZ.','male',1),('Rocky','Balboa','r.balboa@tapefort.com','19450706','$2y$10$zDrsxe6uhYIybLJ1ka.aLOEcR7iDa8gF0r0Opatu.C9J1auQ8EEZ.','male',2);
+VALUES ('Jon','Sérien','j.serien@idiot.com','1985/05/23','$2y$10$zDrsxe6uhYIybLJ1ka.aLOEcR7iDa8gF0r0Opatu.C9J1auQ8EEZ.','male',2),('Rocky','Balboa','r.balboa@tapefort.com','19450706','$2y$10$zDrsxe6uhYIybLJ1ka.aLOEcR7iDa8gF0r0Opatu.C9J1auQ8EEZ.','male',1);
 -- ---------------------------------------------------------------------
 INSERT INTO
         "article"
