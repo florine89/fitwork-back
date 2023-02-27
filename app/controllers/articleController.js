@@ -28,17 +28,22 @@ const articleController = {
     },
 
     async addOneArticle(req,res,next){
-        const user_id = ;
-        const sqlQuery = `INSERT INTO "article" ("title","decription","time","image","slug","category_id","user_id") VALUES ($1,$2,$3,$4,$5,$6,user_id);`;
+        console.log(req.body)
+        const sqlQuery = `INSERT INTO "article" ("title","decription","time","image","slug","category_id","user_id") VALUES ($1,$2,$3,$4,$5,$6,$7);`;
         const values=[req.body.title,
             req.body.decription,
             req.body.time,
             req.body.image,
             req.body.slug,
-            req.body.category_id];    // VOIR comment récup le user_id de l'utilisateur connecté
+            req.body.category_id,
+            req.body.user_id];    // VOIR comment récup le user_id de l'utilisateur connecté
+            console.log("avant try")
         try{
+            console.log("dans le try")
             await dbClient.query(sqlQuery,values);
-            return 'Article créé';
+            console.log("aporès le await")
+            res.json("article créé")
+            return;
         }
         catch(error) {
             next (new Error('problème de création sur la BDD'));
