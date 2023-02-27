@@ -65,8 +65,7 @@ export default{
             console.error(error); 
         }
         return newUser;
-        }
-},
+        },
 
     async update (userId, body){
         console.log('dans le model/update');
