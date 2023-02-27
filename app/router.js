@@ -1,6 +1,7 @@
 import Router from 'express';
 import loginController from './controllers/loginController.js';
 import userController from './controllers/userController.js';
+import articleController from './controllers/articleController.js';
 
 const router = Router();
 /**
@@ -48,5 +49,11 @@ router.post('/user', userController.createUser);
  * @return {object} 500 - Unexpected error
  */
 router.post('/login', loginController.checkLogin);
+
+router.get('/category/:id', articleController.getAllArticles);
+
+router.get('/article/:id', articleController.getOneArticle);
+
+router.post('/article', articleController.addOneArticle);
 
 export default router;
