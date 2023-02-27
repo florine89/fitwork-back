@@ -1,4 +1,4 @@
-import userModel  from '../Models/userModel.js';
+import userModel  from '../DataMapper/userModel.js';
 
 const userController ={
     /**
@@ -13,7 +13,7 @@ const userController ={
             res.json(user)
         }
         else{
-            next(new Error("problème de lecture BDD"))
+            next(new Error("problème de lecture BDD/User"))
         };
     },
     /**

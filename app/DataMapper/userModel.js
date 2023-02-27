@@ -20,6 +20,24 @@ export default{
     return result;
     },
    
+     /**
+     * Cherche un utilisateur par son ID (SQL)
+     * @param {text} email 
+     */
+     async findOneByEmail(email){
+        let result;
+        const sqlQuery= `SELECT * FROM "user" WHERE email=$1;`;
+        const value= [email];
+    try {
+        const response = await dbClient.query (sqlQuery,value);
+        console.log(response);
+        result = response.rows[0];
+    } 
+    catch (err){
+        console.error(err)
+    }
+    return result;
+    },
     /**
      * Gère la création d'un utilisateur (SQL)
      * @param {text} firstname
@@ -29,7 +47,11 @@ export default{
      * @param {text} password
      * @param {integer} role_id
      */
-    async insert (user){
+    async insert (user){ 
+        const foundUser = await this.findOneByEmail(user.email)
+        if (foundUser){
+            const foundAlert='Adresse email déjà utilisée.'
+            console.log(foundAlert);}
         const saltRounds=12;
         const hash=await bcrypt.hash(user.password,saltRounds);
         //user.password=NULL;
@@ -43,7 +65,7 @@ export default{
             console.error(error); 
         }
         return newUser;
-    },
+        },
 
     async update (userId, body){
         console.log('dans le model/update');
