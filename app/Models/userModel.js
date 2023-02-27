@@ -69,7 +69,6 @@ export default{
         const sqlQuery= `DELETE FROM "user" WHERE id=$1`;
         const value= [id];
         try {
-            console.log('dans le try du model/delete');
             await dbClient.query (sqlQuery,value);
             return 'done';
         } catch (err){
