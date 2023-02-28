@@ -76,12 +76,10 @@ export default{
                         WHERE id=$5::int RETURNING (firstname,lastname,email,birth_date);`
         const values =[body.firstname,body.lastname,body.email,body.birth_date,userId];
         try {
-            await dbClient.query (sqlQuery,values);
-            return;
+            const result = await dbClient.query (sqlQuery,values);
+            return result;
         } catch (err){
-            console.error(err)
-
-            // ->>'firstname', ->>'lastname', ->>'email', ->>'birth_date', password=$5->>'password'
+            console.error(err);
         }
     },
 
