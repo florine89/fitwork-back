@@ -10,8 +10,7 @@ export default {
         // déconstruction du foundUser
         const { rows: [foundUser] } = await dbClient.query(sqlQuery, value);
         if (!foundUser){
-            res.status(500).send('Email ou mot de passe incorrect');
-            return; // à vérifier
+            return 'Email ou mot de passe incorrect';
         };
         // On compare les mdp avec bcrypt
         const isValidPassword =await bcrypt.compare(user.password, foundUser.password);
