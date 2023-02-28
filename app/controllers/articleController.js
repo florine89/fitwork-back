@@ -1,4 +1,3 @@
-import  dbClient  from"../service/dbClient.js";
 import articleMapper from "../DataMapper/articleMapper.js";
 
 export default {
@@ -9,7 +8,7 @@ export default {
      * @param {*} next 
      */
     async getAllArticles(req,res,next) {
-        const articles= await articleMapper.getAll(req.params.id)
+        const articles = await articleMapper.getAll(req.params.id)
         if (articles){
             next (new Error(error))
         }
@@ -25,7 +24,7 @@ export default {
     },
 
     async addOneArticle(req,res,next){
-        const newArticle= await articleMapper.addOne(req.body)
+        const newArticle = await articleMapper.addOne(req.body)
         if (!newArticle){
             next (new Error('problème de création sur la BDD'));
         }
@@ -33,10 +32,15 @@ export default {
     },
 
     async updateOneArticle(req,res,next){
-        const updatedArticle= await articleMapper.updateOne(req.params.id,req.body);
-        if (!updatedArticle){
-            next(new Error(`problème lors de la modification`))
+        const foundArticle = await articleMapper.getOne(req.params.id);
+        if (foundArticle.user_id === req.body.user_id){
+            const updatedArticle = await articleMapper.updateOne(req.params.id,req.body);
+            if (!updatedArticle){
+                next(new Error(`problème lors de la modification`))
+            }
+            res.json(updatedArticle);
+        } else {
+            next(new Error(`Vous n'êtes pas l'auteur, vous ne pouvez pas modifier cet article`))
         }
-        res.json(updatedArticle);
     }
 };

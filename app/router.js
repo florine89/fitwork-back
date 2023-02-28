@@ -56,7 +56,7 @@ router.get('/category/:id', articleController.getAllArticles);
 
 router.get('/article/:id', articleController.getOneArticle);
 
-// router.patch('/article/:id', articleController.updateOneArticle)
+router.patch('/article/:id', articleController.updateOneArticle)
 
 router.post('/article', articleController.addOneArticle);
 
