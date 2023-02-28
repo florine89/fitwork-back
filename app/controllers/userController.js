@@ -8,12 +8,16 @@ const userController ={
      * @param {*} next 
      */
     async getUserById(req,res,next){
+        
+        try{
         const user = await userModel.selectOne(req.params.id);
-        if (user){
-            res.json(user)
+        if (!user){
+            throw "problème de lecture BDD/User"
+            }
+            res.json(user);
         }
-        else{
-            next(new Error("problème de lecture BDD/User"))
+        catch (error){
+            next(error);
         };
     },
     /**
@@ -23,39 +27,53 @@ const userController ={
      * @param {*} next 
      */
     async createUser(req,res,next){
+        try{
         const user=await userModel.insert(req.body);
-        if(user){
+        if (!user){
+            throw "problème d'écriture BDD/User"
+            }
             res.json(user);
         }
-        else {
-            next (new Error('problème de création sur la BDD'));
-        }
-
+        catch (error){
+            next(error);
+        };
     },
 
     async updateUser(req,res,next){
-        const user = await userModel.selectOne(req.params.id);
-        if(user){
+        try{
+            const user = await userModel.selectOne(req.params.id);
+            if(!user){
+                throw "utilisateur non trouvé"
+            }
             try {
+                console.log("let's try updating the user");
                 const updateUser = await userModel.update(user.id,req.body);
-                res.json(updateUser)
-            } catch (err) {
-                next(err);
-        }}else {
-            next (new Error('problèmer de connection a la BDD'));
+                if (!updateUser){
+
+                    throw "erreur lors de la mise à jour"
+                }
+            } 
+            catch (error) {
+                next(error);
+            }
+            }
+        catch(error){
+            next(error);
         }
     },
 
     async deleteUser(req,res,next){
-        const user = await userModel.deleteOne(req.params.id);
-        if(user){
+        try{
+            const user = await userModel.deleteOne(req.params.id);
+            if (!user){
+                throw "problème de suppression BDD/User"
+            }
             res.json(user);
         }
-        else {
-            next (new Error('problème de suppression de l\'utilisateur sur la BDD'));
-        }
-
-    }
-};
+        catch (error){
+            next(error);
+        };
+}
+}
 
 export default userController;

@@ -14,6 +14,7 @@ const router = Router();
  * @return {object} 500 - Unexpected error
  */
 router.get('/user/:id', userController.getUserById);
+
 /**
  * PATCH /api/user/{id}
  * @summary modifie un utilisateur
@@ -23,6 +24,7 @@ router.get('/user/:id', userController.getUserById);
  * @return {object} 500 - Unexpected error
  */
 router.patch('/user/:id', userController.updateUser);
+
 /**
  * DELETE /api/user/{id}
  * @summary Supprime un utilisateur
@@ -32,6 +34,7 @@ router.patch('/user/:id', userController.updateUser);
  * @return {object} 500 - Unexpected error
  */
 router.delete('/user/:id', userController.deleteUser);
+
 /**
  * POST /api/user/
  * @summary crée un utilisateur
@@ -41,6 +44,7 @@ router.delete('/user/:id', userController.deleteUser);
  * @return {object} 500 - Unexpected error
  */
 router.post('/user', userController.createUser);
+
 /**
  * POST /api/login
  * @summary Connecte un utilisateur
@@ -51,13 +55,49 @@ router.post('/user', userController.createUser);
  */
 router.post('/login', loginController.checkLogin);
 
-
+/**
+ * POST /api/category/{id}
+ * @summary récupère les articles d'une catégorie
+ * @tags category
+ * @param {number} id.path - id de la catégorie
+ * @return {json} 200 - fichier de retour
+ * @return {object} 500 - Unexpected error
+ */
 router.get('/category/:id', articleController.getAllArticles);
 
+/**
+ * POST /api/article/{id}
+ * @summary Renvoie un article
+ * @tags article
+ * @param {number} id.path- id de l'article
+ * @return {json} 200 - fichier de retour
+ * @return {object} 500 - Unexpected error
+ */
 router.get('/article/:id', articleController.getOneArticle);
 
+
+router.delete('/article/:id', articleController.deleteOneArticle);
+
+
+/**
+ * POST /article/{id}
+ * @summary modifie un article
+ * @tags user
+ * @param {json, number} id.path - fichier de paramètre de connection
+ * @return {json} 200 - fichier de retour
+ * @return {object} 500 - Unexpected error
+ */
 router.patch('/article/:id', articleController.updateOneArticle)
 
+
+/**
+ * POST /article
+ * @summary Crée un article
+ * @tags article
+ * @param {json} - fichier de paramètre de connection
+ * @return {json} 200 - fichier de retour
+ * @return {object} 500 - Unexpected error
+ */
 router.post('/article', articleController.addOneArticle);
 
 /**
