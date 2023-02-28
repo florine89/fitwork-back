@@ -75,6 +75,10 @@ router.get('/category/:id', articleController.getAllArticles);
  */
 router.get('/article/:id', articleController.getOneArticle);
 
+
+router.delete('/article/:id', articleController.deleteOneArticle);
+
+
 /**
  * POST /article/{id}
  * @summary modifie un article
@@ -84,6 +88,7 @@ router.get('/article/:id', articleController.getOneArticle);
  * @return {object} 500 - Unexpected error
  */
 router.patch('/article/:id', articleController.updateOneArticle)
+
 
 /**
  * POST /article
