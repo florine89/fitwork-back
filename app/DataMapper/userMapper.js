@@ -77,7 +77,7 @@ export default{
         const values =[body.firstname,body.lastname,body.email,body.birth_date,userId];
         try {
             const result = await dbClient.query (sqlQuery,values);
-            return result;
+            return result.rows[0];
         } catch (err){
             console.error(err);
         }
