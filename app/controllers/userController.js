@@ -47,10 +47,9 @@ const userController ={
     },
 
     async deleteUser(req,res,next){
-        console.log('dans le controleur/deleteUSer');
         const user = await userModel.deleteOne(req.params.id);
-        if(!user){
-            res.json('done');
+        if(user){
+            res.json(user);
         }
         else {
             next (new Error('problème de suppression de l\'utilisateur sur la BDD'));
