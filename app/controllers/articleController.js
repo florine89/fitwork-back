@@ -46,19 +46,29 @@ const articleController = {
         }
     },
 
-    // async updateOneArticle(req,res,next){
-    //     const id = req.params.id
-    //     const sqlQuery = `UPDATE "article" SET
-    //                     "title" = COALESCE($1, title),
-    //                     "decription" = COALESCE($2, decription),
-    //                     "time" = COALESCE($3, time),
-    //                     "image" = COALESCE($4, image),
-    //                     "slug" = COALESCE($5, slug),
-    //                     "category_id" = COALESCE($6, category_id),
-    //                     "updated_at" = now()
-    //                     WHERE id=$7::int RETURNING (title,decription,time,image,slug,category_id);`
-    //     const values =[body.title,body.decription,body.time,body.image,body.slug,body.category_id,id];
-    // }
-};
+    async updateOneArticle(req,res,next){
+        const foundArticle = await articleMapper.getOne(req.params.id);
+        if (foundArticle.user_id === req.body.user_id){
+            const updatedArticle = await articleMapper.updateOne(req.params.id,req.body);
+            if (!updatedArticle){
+                next(new Error(`problème lors de la modification`))
+            }
+            res.json(updatedArticle);
+        } else {
+            next(new Error(`Vous n'êtes pas l'auteur, vous ne pouvez pas modifier cet article`))
+        }
+    },
 
-export default articleController;
+    async deleteOneArticle(req,res,next){
+        const foundArticle = await articleMapper.getOne(req.params.id);
+        if (foundArticle.user_id === req.body.user_id){
+            const deletedArticle = await articleMapper.deleteOne(req.params.id);
+            if (!deleteArticle){
+                next(new Error(`problème lors de la suppression de l'article`))
+            }
+            res.json(deletedArticle);
+        } else {
+            next(new Error(`Vous n'êtes pas l'auteur, vous ne pouvez pas supprimer cet article`))
+        }
+    }
+};
