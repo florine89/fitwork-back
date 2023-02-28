@@ -69,8 +69,8 @@ export default{
         catch(error) {
             console.log(error);
         }
-    },
 
+    },
     async deleteOne(id){
         const sqlQuery= `DELETE FROM "article" WHERE id=$1`;
         const value= [id];

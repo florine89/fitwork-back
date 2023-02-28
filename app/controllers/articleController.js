@@ -1,3 +1,4 @@
+
 import  dbClient  from"../service/dbClient.js";
 import articleMapper from "../DataMapper/articleMapper.js";
 
@@ -20,7 +21,9 @@ export default{
     }
         catch (error) {
             next (error)
+
         }
+        res.json(articles);
     },
 
     async getOneArticle(req,res,next){
@@ -37,6 +40,7 @@ export default{
         catch (error){
             next(error)
         }
+        res.json(article)
     },
 
     async addOneArticle(req,res,next){
@@ -59,6 +63,7 @@ export default{
         catch(error) {
             next (new Error(error));
         }
+        res.json(newArticle)
     },
 
     async updateOneArticle(req,res,next){
@@ -87,3 +92,4 @@ export default{
         }
     }
 };
+

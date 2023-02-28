@@ -1,4 +1,4 @@
-import userModel  from '../DataMapper/userModel.js';
+import userModel  from '../DataMapper/userMapper.js';
 
 const userController ={
     /**
