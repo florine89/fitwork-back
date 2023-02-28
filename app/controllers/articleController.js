@@ -3,15 +3,23 @@ import articleMapper from "../DataMapper/articleMapper.js";
 
 export default{
     async getAllArticles(req,res,next) {
+        try{
         const id = req.params.id
         const sqlQuery= `SELECT * FROM "article" WHERE category_id=$1;`;
         const value= [id];
-        try {
-            const response = await dbClient.query(sqlQuery,value);
-            res.json(response.rows);
-        } 
-        catch (error){
-            next(new Error("problème de lecture BDD"))
+            try {
+                const response = await dbClient.query(sqlQuery,value);
+                if(!response){
+                    throw ("Il n'y a pas d'article pour cette catégorie")
+                }
+                res.json(response.rows);
+            } 
+            catch (error){
+                next(new Error("problème de lecture BDD"))
+            }
+    }
+        catch (error) {
+            next (error)
         }
     },
 
@@ -21,10 +29,13 @@ export default{
         const value= [id];
         try {
             const response = await dbClient.query(sqlQuery,value);
+            if(!response){
+                throw ("Il n'y a pas d'article.")
+            }
             res.json(response.rows[0]);
         } 
         catch (error){
-            next(new Error("problème de lecture BDD"))
+            next(error)
         }
     },
 
@@ -38,7 +49,10 @@ export default{
             req.body.category_id,
             req.body.user_id];    // VOIR comment récup le user_id de l'utilisateur connecté
         try{
-            await dbClient.query(sqlQuery,values);
+            const response = await dbClient.query(sqlQuery,values);
+            if(!response){
+                throw ("L'article n'a pas pu être ajouté.")
+            }
             res.json("article créé")
             return;
         }
