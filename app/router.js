@@ -2,6 +2,7 @@ import Router from 'express';
 import loginController from './controllers/loginController.js';
 import userController from './controllers/userController.js';
 import articleController from './controllers/articleController.js';
+import categoryController from './controllers/categoryController.js';
 
 const router = Router();
 /**
@@ -50,6 +51,7 @@ router.post('/user', userController.createUser);
  */
 router.post('/login', loginController.checkLogin);
 
+
 router.get('/category/:id', articleController.getAllArticles);
 
 router.get('/article/:id', articleController.getOneArticle);
@@ -57,5 +59,16 @@ router.get('/article/:id', articleController.getOneArticle);
 // router.patch('/article/:id', articleController.updateOneArticle)
 
 router.post('/article', articleController.addOneArticle);
+
+/**
+ * GET /api/categories
+ * @summary liste toutes les catégories 
+ * @tags category
+ * @param {json} - fichier de paramètre de connection
+ * @return {json} 200 - fichier de retour
+ * @return {object} 500 - Unexpected error
+ */
+router.get('/categories', categoryController.getCategories);
+
 
 export default router;
