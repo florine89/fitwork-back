@@ -72,6 +72,13 @@ export default{
     },
 
     async deleteOne(id){
-
+        const sqlQuery= `DELETE FROM "article" WHERE id=$1`;
+        const value= [id];
+        try {
+            await dbClient.query (sqlQuery,value);
+            return 'done';
+        } catch (err){
+            console.error(err)
+        }
     }
 }

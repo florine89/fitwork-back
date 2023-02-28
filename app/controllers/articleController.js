@@ -1,6 +1,7 @@
 import  dbClient  from"../service/dbClient.js";
+import articleMapper from "../DataMapper/articleMapper.js";
 
-const articleController = {
+export default{
     async getAllArticles(req,res,next) {
         const id = req.params.id
         const sqlQuery= `SELECT * FROM "article" WHERE category_id=$1;`;
@@ -63,7 +64,7 @@ const articleController = {
         const foundArticle = await articleMapper.getOne(req.params.id);
         if (foundArticle.user_id === req.body.user_id){
             const deletedArticle = await articleMapper.deleteOne(req.params.id);
-            if (!deleteArticle){
+            if (!deletedArticle){
                 next(new Error(`problème lors de la suppression de l'article`))
             }
             res.json(deletedArticle);
