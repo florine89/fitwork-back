@@ -64,11 +64,10 @@ export default{
         catch(error){
             console.error(error); 
         }
-        return newUser;
         },
 
     async update (userId, body){
-        console.log('dans le model/update');
+        
         const sqlQuery = `UPDATE "user" SET
                         "firstname" = COALESCE($1, firstname),
                         "lastname" = COALESCE($2, lastname),
@@ -77,13 +76,10 @@ export default{
                         WHERE id=$5::int RETURNING (firstname,lastname,email,birth_date);`
         const values =[body.firstname,body.lastname,body.email,body.birth_date,userId];
         try {
-            console.log('dans le try du model/update');
-            const response = await dbClient.query (sqlQuery,values);
-            return response;
+            const result = await dbClient.query (sqlQuery,values);
+            return result;
         } catch (err){
-            console.error(err)
-
-            // ->>'firstname', ->>'lastname', ->>'email', ->>'birth_date', password=$5->>'password'
+            console.error(err);
         }
     },
 
