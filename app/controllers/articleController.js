@@ -28,7 +28,6 @@ const articleController = {
     },
 
     async addOneArticle(req,res,next){
-        console.log(req.body)
         const sqlQuery = `INSERT INTO "article" ("title","decription","time","image","slug","category_id","user_id") VALUES ($1,$2,$3,$4,$5,$6,$7);`;
         const values=[req.body.title,
             req.body.decription,
@@ -37,18 +36,29 @@ const articleController = {
             req.body.slug,
             req.body.category_id,
             req.body.user_id];    // VOIR comment récup le user_id de l'utilisateur connecté
-            console.log("avant try")
         try{
-            console.log("dans le try")
             await dbClient.query(sqlQuery,values);
-            console.log("aporès le await")
             res.json("article créé")
             return;
         }
         catch(error) {
-            next (new Error('problème de création sur la BDD'));
+            next (new Error(error));
         }
-    }
+    },
+
+    // async updateOneArticle(req,res,next){
+    //     const id = req.params.id
+    //     const sqlQuery = `UPDATE "article" SET
+    //                     "title" = COALESCE($1, title),
+    //                     "decription" = COALESCE($2, decription),
+    //                     "time" = COALESCE($3, time),
+    //                     "image" = COALESCE($4, image),
+    //                     "slug" = COALESCE($5, slug),
+    //                     "category_id" = COALESCE($6, category_id),
+    //                     "updated_at" = now()
+    //                     WHERE id=$7::int RETURNING (title,decription,time,image,slug,category_id);`
+    //     const values =[body.title,body.decription,body.time,body.image,body.slug,body.category_id,id];
+    // }
 };
 
 export default articleController;
