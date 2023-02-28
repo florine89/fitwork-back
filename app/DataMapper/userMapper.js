@@ -67,19 +67,24 @@ export default{
         },
 
     async update (userId, body){
-        
+        if (! (body.includes("firstname" ||"lastname" || "email" || "birth_date"))){
+            next('error');
+        }
         const sqlQuery = `UPDATE "user" SET
                         "firstname" = COALESCE($1, firstname),
                         "lastname" = COALESCE($2, lastname),
                         "email" = COALESCE($3, email),
                         "birth_date" = COALESCE($4, birth_date)
-                        WHERE id=$5::int RETURNING (firstname,lastname,email,birth_date);`
+                        WHERE id=$5::int RETURNING firstname,lastname,email,birth_date;`
         const values =[body.firstname,body.lastname,body.email,body.birth_date,userId];
         try {
+            console.log("on essaye vraiment ici");
             const result = await dbClient.query (sqlQuery,values);
-            return result;
-        } catch (err){
-            console.error(err);
+            console.log("on a réussi", result.rows[0]);
+            // return result.rows[0];
+        } catch (error){
+            console.log(error);
+            next(error);
         }
     },
 
@@ -92,7 +97,6 @@ export default{
         } catch (err){
             console.error(err)
         }
-        // return;
         }
 
 }
