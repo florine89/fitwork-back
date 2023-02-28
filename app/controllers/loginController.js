@@ -17,17 +17,20 @@ const loginController={
         // déconstruction du foundUser
         const { rows: [foundUser] } = await dbClient.query(sqlQuery, value);
         if (!foundUser){
-            res.status(500).send('Email ou mot de passe incorrect')
+            res.status(500).send('Email ou mot de passe incorrect');
+            return; // à vérifier
         };
 
         // On compare les mdp avec bcrypt
         const isValidPassword =await bcrypt.compare(password, foundUser.password);
         if (!isValidPassword){
             res.status(500).send('Email ou mot de passe incorrect')
+            return; // à vérifier
         };
         const token = jwt.sign({email:foundUser.email}, process.env.SESSION_SECRET);
-        const firstname=foundUser.firstname
-        res.json({logged:true,firstname,token});
+        const firstname=foundUser.firstname;
+        const id = foundUser.id;
+        res.json({logged:true,firstname,id,token});
 }
 };
 
