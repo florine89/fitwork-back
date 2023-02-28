@@ -11,6 +11,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 app.use('/api',router);
 
+app.use((err, res) => {
+    console.error(err.stack)
+    res.status(500).json(err.stack)
+  });
+
 app.listen(port, () => {
     console.log(`Server ready: http://localhost:${port}`);
 });
