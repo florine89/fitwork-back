@@ -76,9 +76,8 @@ export default{
                         WHERE id=$5::int RETURNING (firstname,lastname,email,birth_date);`
         const values =[body.firstname,body.lastname,body.email,body.birth_date,userId];
         try {
-            console.log('dans le try du model/update');
-            const response = await dbClient.query (sqlQuery,values);
-            return response;
+            await dbClient.query (sqlQuery,values);
+            return;
         } catch (err){
             console.error(err)
 
@@ -90,7 +89,6 @@ export default{
         const sqlQuery= `DELETE FROM "user" WHERE id=$1`;
         const value= [id];
         try {
-            console.log('dans le try du model/delete');
             await dbClient.query (sqlQuery,value);
             return 'done';
         } catch (err){
