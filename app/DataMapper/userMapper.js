@@ -73,7 +73,7 @@ export default{
                         "lastname" = COALESCE($2, lastname),
                         "email" = COALESCE($3, email),
                         "birth_date" = COALESCE($4, birth_date)
-                        WHERE id=$5::int RETURNING (firstname,lastname,email,birth_date);`
+                        WHERE id=$5::int RETURNING firstname,lastname,email,birth_date;`
         const values =[body.firstname,body.lastname,body.email,body.birth_date,userId];
         try {
             const result = await dbClient.query (sqlQuery,values);
