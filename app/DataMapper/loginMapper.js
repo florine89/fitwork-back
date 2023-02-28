@@ -7,21 +7,24 @@ export default {
         let result;
         const sqlQuery=`SELECT * FROM "user" WHERE "email"=$1;`;
         const value=[user.email];
-        // déconstruction du foundUser
-        const { rows: [foundUser] } = await dbClient.query(sqlQuery, value);
-        if (!foundUser){
-            return 'Email ou mot de passe incorrect';
-        };
-        // On compare les mdp avec bcrypt
-        const isValidPassword =await bcrypt.compare(user.password, foundUser.password);
-        if (!isValidPassword){
-            next (new Error('Email ou mot de passe incorrect'));
-            return; // à vérifier
-        };
-        const token = jwt.sign({email:foundUser.email}, process.env.SESSION_SECRET);
-        const firstname=foundUser.firstname;
-        const id = foundUser.id;
-        result ={logged:true,firstname,id,token};
-        return result;
-    }
-}
+        try{
+            const { rows: [foundUser] } = await dbClient.query(sqlQuery, value);
+            if (!foundUser){
+                throw 'Email ou mot de passe incorrect';
+            };
+            // On compare les mdp avec bcrypt
+            const isValidPassword =await bcrypt.compare(user.password, foundUser.password);
+            if (!isValidPassword){
+                throw'Email ou mot de passe incorrect';
+            };
+            const token = jwt.sign({email:foundUser.email}, process.env.SESSION_SECRET);
+            const firstname=foundUser.firstname;
+            const id = foundUser.id;
+            result ={logged:true,firstname,id,token};
+            
+        }
+        catch(error){
+            throw 'erreur de BDD'
+        }
+        return result
+    }}

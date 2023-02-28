@@ -1,18 +1,20 @@
 import loginMapper from "../DataMapper/loginMapper.js";
-const loginController={
+export default{
     /**
      * Vérification de l'authentification
      * @param {*} req 
      * @param {*} res 
      */
     async checkLogin(req,res){
-        // on génère une instance de User à partir de req.body qui contient username et password
+        try{
         const loggedUser = await loginMapper.checkLogin(req.body)
-        if(!loggedUser){
-            next( new Error('utilisateur ou mot de passe incorrect'))
+        if (!loggedUser){
+            throw "Email ou mot de passe incorrect"
         }
         res.json(loggedUser);
-}
+        }
+        catch (error){
+            next(error);
+        }
+    }
 };
-
-export default loginController;
