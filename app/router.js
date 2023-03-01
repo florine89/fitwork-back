@@ -3,6 +3,7 @@ import loginController from './controllers/loginController.js';
 import userController from './controllers/userController.js';
 import articleController from './controllers/articleController.js';
 import categoryController from './controllers/categoryController.js';
+import programController from './controllers/programController.js';
 
 const router = Router();
 /**
@@ -109,6 +110,8 @@ router.post('/article', articleController.addOneArticle);
  * @return {object} 500 - Unexpected error
  */
 router.get('/categories', categoryController.getCategories);
+
+router.get('/user/:id/program', programController.getUserProgram);
 
 
 export default router;
