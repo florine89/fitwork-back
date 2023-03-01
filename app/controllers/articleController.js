@@ -81,7 +81,7 @@ export default{
                 next(new Error(`Vous n'êtes pas l'auteur, vous ne pouvez pas supprimer cet article`))
             }
             try{
-                log
+                
                 const deletedArticle = await articleMapper.deleteOne(req.params.id);
                 if (!deletedArticle){
                     next(new Error(`problème lors de la suppression de l'article`))
