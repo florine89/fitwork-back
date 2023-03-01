@@ -82,7 +82,11 @@ export default{
         const sqlQuery= `DELETE FROM "article" WHERE id=$1`;
         const value= [id];
         try {
-            await dbClient.query (sqlQuery,value);
+            const result = await dbClient.query (sqlQuery,value);
+            if(!result){
+                throw 'echec de la suppression';
+            }
+            console.log(result);
             return 'done';
         } catch (err){
             console.error(err)
