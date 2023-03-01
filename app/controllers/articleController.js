@@ -46,8 +46,12 @@ export default{
     async updateOneArticle(req,res,next){
         try{
         const foundArticle = await articleMapper.getOne(req.params.id);
-
-        if (foundArticle.user_id === req.body.user_id){
+        if(!foundArticle){
+            next(new Error(`l'article n'existe pas`))
+        }
+        if (foundArticle.user_id !== req.body.user_id){
+            next(new Error(`Vous n'êtes pas l'auteur, vous ne pouvez pas supprimer cet article`))
+        }
             try{
                 const updatedArticle = await articleMapper.updateOne(req.params.id,req.body);
                 if (!updatedArticle){
@@ -59,20 +63,20 @@ export default{
                 console.log(error)
                 next(error)
             }
-        } else {
-            next(new Error(`Vous n'êtes pas l'auteur, vous ne pouvez pas modifier cet article`))
+    
         }
-    }
         catch(error){
-            next(new Error('article introuvable'))
+            console.log(error);
+            next(error);
         }
     },
 
     async deleteOneArticle(req,res,next){
         try{
             const foundArticle = await articleMapper.getOne(req.params.id);
-            console.log('req.body.user_id',req.body.user_id);
-            console.log('foundArticle',foundArticle);
+            if(!foundArticle){
+                next(new Error(`l'article n'existe pas`))
+            }
             if (foundArticle.user_id !== req.body.user_id){
                 next(new Error(`Vous n'êtes pas l'auteur, vous ne pouvez pas supprimer cet article`))
             }
