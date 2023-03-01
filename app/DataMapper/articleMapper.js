@@ -36,13 +36,13 @@ export default{
     async addOne (body) {
         
         const sqlQuery = `INSERT INTO "article" 
-                        ("title","description","time","image","slug","category_id","user_id","created_at") 
-                        VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING title, description, time, image, slug, category_id, user_id;`;
+                        ("title","description","time","image","type","category_id","user_id","created_at") 
+                        VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING title, description, time, image, type, category_id, user_id;`;
         const values=[body.title,
             body.description,
             body.time,
             body.image,
-            body.slug,
+            body.type,
             body.category_id,
             body.user_id,
             new Date()];
@@ -62,11 +62,11 @@ export default{
                         "description" = COALESCE($2, description),
                         "time" = COALESCE($3, time),
                         "image" = COALESCE($4, image),
-                        "slug" = COALESCE($5, slug),
+                        "type" = COALESCE($5, type),
                         "category_id" = COALESCE($6, category_id),
                         "updated_at" = now()
-                        WHERE id=$7::int RETURNING title,description,time,image,slug,category_id;`
-        const values =[body.title,body.description,body.time,body.image,body.slug,body.category_id,id];
+                        WHERE id=$7::int RETURNING title,description,time,image,type,category_id;`
+        const values =[body.title,body.description,body.time,body.image,body.type,body.category_id,id];
         try{
             const response = await dbClient.query(sqlQuery,values);
             result = response.rows[0]

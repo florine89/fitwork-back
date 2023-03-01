@@ -2,7 +2,7 @@ import dbClient from '../service/dbClient.js'
 export default{
     async getAllCategories(){
         let result;
-        const sqlQuery = `SELECT name from category;`
+        const sqlQuery = `SELECT * from category;`
         try {
             const response = await dbClient.query(sqlQuery);
             return response.rows;
