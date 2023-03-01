@@ -11,41 +11,47 @@ export default{
             result = response.rows;
         } 
         catch (error){
-            next(new Error(error))
+            next(error)
         }
         return result
     },
     
-    async getOne (id){    
-        let result;
+    async getOne (id){
         const sqlQuery= `SELECT * FROM "article" WHERE id=$1;`;
         const value= [id];
+        console.log('getOne[value]',value);
         try {
             const response = await dbClient.query(sqlQuery,value);
-            result = response.rows[0];
+            if(!response){
+                return {title:"Cet article n'existe pas",user_id:id};
+            }
+            return response.rows[0];
         } 
         catch (error){
-            next(new Error(error))
+            throw error
         }
-        return result
+        
     },
 
     async addOne (body) {
-        const sqlQuery = `INSERT INTO "article" ("title","decription","time","image","slug","category_id","user_id") VALUES ($1,$2,$3,$4,$5,$6,$7);`;
+        
+        const sqlQuery = `INSERT INTO "article" 
+                        ("title","description","time","image","slug","category_id","user_id","created_at") 
+                        VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING title, description, time, image, slug, category_id, user_id;`;
         const values=[body.title,
-            body.decription,
+            body.description,
             body.time,
             body.image,
             body.slug,
             body.category_id,
-            body.user_id];
+            body.user_id,
+            new Date()];
         try{
             const response = await dbClient.query(sqlQuery,values);
-            result = response.rows[0]
-            return result;
+            return response.rows[0];
         }
         catch(error) {
-            next (new Error(error));
+            console.log(error);
         }
     },
 
@@ -53,14 +59,14 @@ export default{
         let result;
         const sqlQuery = `UPDATE "article" SET
                         "title" = COALESCE($1, title),
-                        "decription" = COALESCE($2, decription),
+                        "description" = COALESCE($2, description),
                         "time" = COALESCE($3, time),
                         "image" = COALESCE($4, image),
                         "slug" = COALESCE($5, slug),
                         "category_id" = COALESCE($6, category_id),
                         "updated_at" = now()
-                        WHERE id=$7::int RETURNING (title,decription,time,image,slug,category_id);`
-        const values =[body.title,body.decription,body.time,body.image,body.slug,body.category_id,id];
+                        WHERE id=$7::int RETURNING title,description,time,image,slug,category_id;`
+        const values =[body.title,body.description,body.time,body.image,body.slug,body.category_id,id];
         try{
             const response = await dbClient.query(sqlQuery,values);
             result = response.rows[0]
@@ -68,6 +74,7 @@ export default{
         }
         catch(error) {
             console.log(error);
+            console.log(error)
         }
 
     },
