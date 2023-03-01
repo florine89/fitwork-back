@@ -30,7 +30,7 @@ VALUES ('Jon','Sérien','j.serien@idiot.com','1985/05/23','$2y$10$zDrsxe6uhYIybL
 -- ---------------------------------------------------------------------
 INSERT INTO
         "article"
-       ("title", "decription","time","image","slug","category_id","user_id")
+       ("title", "description","time","image","slug","category_id","user_id")
 VALUES ('bonjour','un petit conseil pour dire bonjour',NULL,NULL,'conseil',1,2), 
        ('saluer','une petite activité pour dire bonjour','00:03:00',NULL,'activité',1,2);
 -- ---------------------------------------------------------------------
