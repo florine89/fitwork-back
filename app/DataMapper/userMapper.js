@@ -67,9 +67,7 @@ export default{
         },
 
     async update (userId, body){
-        if (! (body.includes("firstname" ||"lastname" || "email" || "birth_date"))){
-            next('error');
-        }
+       
         const sqlQuery = `UPDATE "user" SET
                         "firstname" = COALESCE($1, firstname),
                         "lastname" = COALESCE($2, lastname),

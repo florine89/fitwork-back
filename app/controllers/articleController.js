@@ -18,12 +18,11 @@ export default{
             catch (error){
                 next(new Error("problème de lecture BDD"))
             }
-    }
+        }
         catch (error) {
             next (error)
 
         }
-        res.json(articles);
     },
 
     async getOneArticle(req,res,next){
