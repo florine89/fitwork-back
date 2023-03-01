@@ -5,7 +5,7 @@ export default{
      * @param {*} req 
      * @param {*} res 
      */
-    async checkLogin(req,res){
+    async checkLogin(req,res,next){
         try{
         const loggedUser = await loginMapper.checkLogin(req.body)
         if (!loggedUser){

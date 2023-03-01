@@ -23,7 +23,7 @@ export default{
         try {
             const response = await dbClient.query(sqlQuery,value);
             if(!response){
-                return {title:"Cet article n'existe pas",user_id:id};
+                throw "Cet article n'existe pas";
             }
             return response.rows[0];
         } 
