@@ -3,6 +3,11 @@ import  jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 
 export default {
+    /**
+     * SQL REQUEST et chiffrement pour le login
+     * @param {*} user - email +  password
+     * @returns logged status, first name id, role, token
+     */
     async checkLogin(user){
         let result;
         const sqlQuery=`SELECT * FROM "user" WHERE "email"=$1;`;
@@ -24,6 +29,7 @@ export default {
             
         }
         catch(error){
+            console.log('loginMapper Checklogin sql request - error : ', error);
             throw 'erreur de BDD'
         }
         return result
