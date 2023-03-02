@@ -20,7 +20,6 @@ export default{
     async getOne (id){
         const sqlQuery= `SELECT * FROM "article" WHERE id=$1;`;
         const value= [id];
-        console.log('getOne[value]',value);
         try {
             const response = await dbClient.query(sqlQuery,value);
             if(!response){
@@ -68,7 +67,7 @@ export default{
                         "type" = COALESCE($5, type),
                         "category_id" = COALESCE($6, category_id),
                         "updated_at" = now()
-                        WHERE id=$7::int RETURNING title,description,time,image,type,category_id;`
+                        WHERE id=$7::int RETURNING title,description,time,image,type,category_id,updated_at;`
         const values =[body.title,body.description,body.time,body.image,body.type,body.category_id,id];
         try{
             const response = await dbClient.query(sqlQuery,values);
