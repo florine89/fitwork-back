@@ -38,7 +38,12 @@ const userController ={
             next(error);
         };
     },
-
+    /**
+     * mettre à jour un utilisateur depuis un json
+     * @param {*} req 
+     * @param {*} res 
+     * @param {*} next 
+     */
     async updateUser(req,res,next){
         try{
             const user = await userModel.selectOne(req.params.id);
@@ -46,22 +51,28 @@ const userController ={
                 throw "utilisateur non trouvé"
             }
             try {
-                console.log("let's try updating the user");
                 const updateUser = await userModel.update(user.id,req.body);
                 if (!updateUser){
-
                     throw "erreur lors de la mise à jour"
                 }
+                res.json(updateUser);
             } 
             catch (error) {
+                console.log('updateUser-error : ',error);
                 next(error);
             }
             }
         catch(error){
+            console.log('updateUser user not found error : ', error);
             next(error);
         }
     },
-
+    /**
+     * supprime un utilisateur 
+     * @param {*} req 
+     * @param {*} res 
+     * @param {*} next 
+     */
     async deleteUser(req,res,next){
         try{
             const user = await userModel.deleteOne(req.params.id);
@@ -71,6 +82,7 @@ const userController ={
             res.json(user);
         }
         catch (error){
+            console.log('deleteUser-error : ', error);
             next(error);
         };
 }

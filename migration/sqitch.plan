@@ -5,3 +5,4 @@
 2.alter_mail 2023-02-24T08:36:17Z Anthalius <Anthalius@Mortefleur> # altering user.mail to add unique constraint
 3.delete+gender 2023-02-24T12:35:25Z Anthalius <Anthalius@Mortefleur> # on delete cascade for user_id + delete gender from table
 4.cascade_article 2023-03-01T13:24:03Z Anthalius <Anthalius@Mortefleur> # adding ON DELETE CASCADE on article_id tables favorite and program
+5.add_program_id 2023-03-02T13:28:55Z Anthalius <Anthalius@Mortefleur> # adding an id to program table to allow deletion of 1 specific article for a given user
