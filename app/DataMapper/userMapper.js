@@ -76,10 +76,8 @@ export default{
                         WHERE id=$5::int RETURNING firstname,lastname,email,birth_date;`
         const values =[body.firstname,body.lastname,body.email,body.birth_date,userId];
         try {
-            console.log("on essaye vraiment ici");
             const result = await dbClient.query (sqlQuery,values);
-            console.log("on a réussi", result.rows[0]);
-            // return result.rows[0];
+            return result.rows[0];
         } catch (error){
             console.log(error);
             next(error);
