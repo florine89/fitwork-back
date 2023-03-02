@@ -17,5 +17,20 @@ export default{
             console.log('programMapper getProgram sql request - error : ', error);
                 throw error
             }
+            return result;
+        },
+
+        async addToProgram (user_id,article_id) {
+        
+            const sqlQuery = `INSERT INTO "program" (user_id, article_id)
+                            VALUES ($1,$2) RETURNING *;`;
+            const values=[user_id,article_id];
+            try{
+                const response = await dbClient.query(sqlQuery,values);
+                return response.rows[0];
+            }
+            catch(error) {
+                console.log(error);
+            }
         }
-}; 
+};

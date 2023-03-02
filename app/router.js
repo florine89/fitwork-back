@@ -120,4 +120,6 @@ router.get('/categories', categoryController.getCategories);
  */
 router.get('/user/:id/program', programController.getUserProgram);
 
+router.post('/article/:id/program', programController.postArticleProgram);
+
 export default router;
