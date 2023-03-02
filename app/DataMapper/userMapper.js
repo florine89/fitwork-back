@@ -31,7 +31,6 @@ export default{
         const value= [email];
     try {
         const response = await dbClient.query (sqlQuery,value);
-        console.log(response);
         result = response.rows[0];
     } 
     catch (error){
@@ -49,25 +48,32 @@ export default{
      * @param {text} password
      * @param {integer} role_id
      */
-    async insert (user){ 
-        const foundUser = await this.findOneByEmail(user.email)
-        if (foundUser){
-            const foundAlert='Adresse email déjà utilisée.'
-            console.log(foundAlert);}
-        const saltRounds=12;
-        const hash=await bcrypt.hash(user.password,saltRounds);
-        //user.password=NULL;
-        const sqlQuery =`INSERT INTO "user" ("firstname","lastname","email","birth_date","password","role_id") VALUES ($1,$2,$3,$4,$5,$6);`;    
-        const values=[user.firstname, user.lastname,user.email,user.birth_date,hash,user.role_id];
+    async insert (user){
         try{
-            await dbClient.query(sqlQuery,values);
-            return 'ok';
+            const foundUser = await this.findOneByEmail(user.email)
+            if (foundUser){
+                const foundAlert='Adresse email déjà utilisée.'
+                return foundAlert
+            }
+            const saltRounds=12;
+            const hash=await bcrypt.hash(user.password,saltRounds);
+            // user.password=NULL;
+            const sqlQuery =`INSERT INTO "user" ("firstname","lastname","email","birth_date","password","role_id") VALUES ($1,$2,$3,$4,$5,$6);`;    
+            const values=[user.firstname, user.lastname,user.email,user.birth_date,hash,user.role_id=2];
+            try{
+                await dbClient.query(sqlQuery,values);
+                return 'ok';
+            }
+            catch(error){
+                console.log('userMapper insertOne sql request - error : ', error);
+                throw error
+            }
         }
         catch(error){
-            console.log('userMapper insertOne sql request - error : ', error);
-            throw error
+            console.log('userMapper insert findByEmail - error : ', error);
+            throw error;
         }
-        },
+    },
 
     async update (userId, body){
        
@@ -75,7 +81,8 @@ export default{
                         "firstname" = COALESCE($1, firstname),
                         "lastname" = COALESCE($2, lastname),
                         "email" = COALESCE($3, email),
-                        "birth_date" = COALESCE($4, birth_date)
+                        "birth_date" = COALESCE($4, birth_date),
+                        updated_at = now()
                         WHERE id=$5::int RETURNING firstname,lastname,email,birth_date;`
         const values =[body.firstname,body.lastname,body.email,body.birth_date,userId];
         try {

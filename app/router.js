@@ -111,7 +111,13 @@ router.post('/article', articleController.addOneArticle);
  */
 router.get('/categories', categoryController.getCategories);
 
+/**
+ * GET /user/{id}/program
+ * @summary liste les articles du programme d'un utilisateur 
+ * @tags program
+ * @return {json} 200 - fichier de retour
+ * @return {object} 500 - Unexpected error
+ */
 router.get('/user/:id/program', programController.getUserProgram);
-
 
 export default router;
