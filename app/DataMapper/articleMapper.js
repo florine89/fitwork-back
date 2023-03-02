@@ -11,7 +11,8 @@ export default{
             result = response.rows;
         } 
         catch (error){
-            next(error)
+            console.log('articleMapper getAll sql request - error : ', error);
+            throw error
         }
         return result
     },
@@ -19,7 +20,6 @@ export default{
     async getOne (id){
         const sqlQuery= `SELECT * FROM "article" WHERE id=$1;`;
         const value= [id];
-        console.log('getOne[value]',value);
         try {
             const response = await dbClient.query(sqlQuery,value);
             if(!response){
@@ -28,6 +28,7 @@ export default{
             return response.rows[0];
         } 
         catch (error){
+            console.log('ArticleMapper getOne sql request - error : ', error);
             throw error
         }
         
@@ -51,7 +52,8 @@ export default{
             return response.rows[0];
         }
         catch(error) {
-            console.log(error);
+            console.log('articleMapper addOne sql request - error : ', error);
+            throw error
         }
     },
 
@@ -65,7 +67,7 @@ export default{
                         "type" = COALESCE($5, type),
                         "category_id" = COALESCE($6, category_id),
                         "updated_at" = now()
-                        WHERE id=$7::int RETURNING title,description,time,image,type,category_id;`
+                        WHERE id=$7::int RETURNING title,description,time,image,type,category_id,updated_at;`
         const values =[body.title,body.description,body.time,body.image,body.type,body.category_id,id];
         try{
             const response = await dbClient.query(sqlQuery,values);
@@ -73,8 +75,8 @@ export default{
             return result;
         }
         catch(error) {
-            console.log(error);
-            console.log(error)
+            console.log('articleMapper updateOne sql request - error : ', error);
+            throw error
         }
 
     },
@@ -88,8 +90,9 @@ export default{
             }
             console.log(result);
             return 'done';
-        } catch (err){
-            console.error(err)
+        } catch (error){
+            console.log('articleMapper deleteOne sql request - error : ', error);
+            throw error
         }
     }
 }

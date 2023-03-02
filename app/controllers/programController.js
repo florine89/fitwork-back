@@ -11,6 +11,7 @@ export default{
                 res.json(foundProgram);
             }
             catch (error) {
+                console.log('getUSerProgram-error : ', error);
                 next (error);
         }
     },

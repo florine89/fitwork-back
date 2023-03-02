@@ -14,6 +14,7 @@ export default{
         res.json(loggedUser);
         }
         catch (error){
+            console.log('checkLogin-error : ',error);
             next(error);
         }
     }

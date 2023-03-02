@@ -10,7 +10,7 @@ export default{
             res.json(articles);
         }
         catch(error){
-            console.log(error);
+            console.log('getAllArticle-error : ',error);
             next(error)
         }
     },
@@ -24,7 +24,7 @@ export default{
             res.json(article);
         }
         catch(error){
-            console.log(error);
+            console.log('getOneArticle-error : ',error);
             next(error)
         }
     },
@@ -38,7 +38,7 @@ export default{
             res.json(newArticle);
         }
         catch(error){
-            console.log(error);
+            console.log('addOneArticle-error',error);
             next(error);
         }
     },
@@ -60,13 +60,13 @@ export default{
                 res.json(updatedArticle);
             }
             catch(error){
-                console.log(error)
+                console.log('updatedArticle from Mapper-error : ', error)
                 next(error)
             }
     
         }
         catch(error){
-            console.log(error);
+            console.log('updateOneArticle article not found error : ', error);
             next(error);
         }
     },
@@ -89,12 +89,12 @@ export default{
                 res.json(deletedArticle);
             }
             catch(error){
-                console.log(error)
+                console.log('deleteOneArticle no deleted article - error : ', error)
                 next(error)
             }
         }
         catch(error){
-            console.log(error);
+            console.log('deleteOneArticle no found article -error : ', error);
             next(error);
         }
     }

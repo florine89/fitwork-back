@@ -14,6 +14,7 @@ export default{
                 result = response.rows;
             }
             catch (error){
+            console.log('programMapper getProgram sql request - error : ', error);
                 throw error
             }
             return result;
