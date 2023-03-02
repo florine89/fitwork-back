@@ -122,4 +122,6 @@ router.get('/user/:id/program', programController.getUserProgram);
 
 router.post('/article/:id/program', programController.postArticleProgram);
 
+router.delete('/article/:id/program', programController.deleteArticleProgram);
+
 export default router;
