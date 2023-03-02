@@ -52,6 +52,7 @@ const userController ={
 
                     throw "erreur lors de la mise à jour"
                 }
+                res.json(updateUser);
             } 
             catch (error) {
                 next(error);
