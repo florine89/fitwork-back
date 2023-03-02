@@ -11,7 +11,8 @@ export default{
             result = response.rows;
         } 
         catch (error){
-            next(error)
+            console.log('articleMapper getAll sql request - error : ', error);
+            throw error
         }
         return result
     },
@@ -28,6 +29,7 @@ export default{
             return response.rows[0];
         } 
         catch (error){
+            console.log('ArticleMapper getOne sql request - error : ', error);
             throw error
         }
         
@@ -51,7 +53,8 @@ export default{
             return response.rows[0];
         }
         catch(error) {
-            console.log(error);
+            console.log('articleMapper addOne sql request - error : ', error);
+            throw error
         }
     },
 
@@ -73,8 +76,8 @@ export default{
             return result;
         }
         catch(error) {
-            console.log(error);
-            console.log(error)
+            console.log('articleMapper updateOne sql request - error : ', error);
+            throw error
         }
 
     },
@@ -88,8 +91,9 @@ export default{
             }
             console.log(result);
             return 'done';
-        } catch (err){
-            console.error(err)
+        } catch (error){
+            console.log('articleMapper deleteOne sql request - error : ', error);
+            throw error
         }
     }
 }

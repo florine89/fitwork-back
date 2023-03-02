@@ -14,14 +14,15 @@ export default{
         const response = await dbClient.query (sqlQuery,value);
         result = response.rows[0];
     } 
-    catch (err){
-        console.error(err)
+    catch (error){
+        console.log('userMapper selectOne sql request - error : ', error);
+        throw error
     }
     return result;
     },
    
      /**
-     * Cherche un utilisateur par son ID (SQL)
+     * Cherche un utilisateur par son email (SQL)
      * @param {text} email 
      */
      async findOneByEmail(email){
@@ -33,8 +34,9 @@ export default{
         console.log(response);
         result = response.rows[0];
     } 
-    catch (err){
-        console.error(err)
+    catch (error){
+        console.log('userMapper findOnebyEmail sql request - error : ', error);
+        throw error
     }
     return result;
     },
@@ -62,7 +64,8 @@ export default{
             return 'ok';
         }
         catch(error){
-            console.error(error); 
+            console.log('userMapper insertOne sql request - error : ', error);
+            throw error
         }
         },
 
@@ -79,8 +82,8 @@ export default{
             const result = await dbClient.query (sqlQuery,values);
             return result.rows[0];
         } catch (error){
-            console.log(error);
-            next(error);
+            console.log('userMapper update sql request - error : ', error);
+            throw error
         }
     },
 
@@ -90,8 +93,9 @@ export default{
         try {
             await dbClient.query (sqlQuery,value);
             return 'done';
-        } catch (err){
-            console.error(err)
+        } catch (error){
+            console.log('userMapper deleteOne sql request - error : ', error);
+            throw error
         }
         }
 
