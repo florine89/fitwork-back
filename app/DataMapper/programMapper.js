@@ -45,6 +45,8 @@ export default{
             }
             catch(error) {
                 console.log('deleteFromProgram SQL -error : ', error);
+                console.log(error);
+
             }
         }
 };
