@@ -4,6 +4,7 @@ import userController from './controllers/userController.js';
 import articleController from './controllers/articleController.js';
 import categoryController from './controllers/categoryController.js';
 import programController from './controllers/programController.js';
+import labelController from './controllers/labelController.js';
 
 const router = Router();
 /**
@@ -123,5 +124,9 @@ router.get('/user/:id/program', programController.getUserProgram);
 router.post('/article/:id/program', programController.postArticleProgram);
 
 router.delete('/article/:id/program', programController.deleteArticleProgram);
+
+router.get('/labels', labelController.getAllLabels);
+
+router.get('/labels/:id/articles', labelController.getAllArticlesByLabels);
 
 export default router;
