@@ -10,7 +10,10 @@ export default {
      */
     async checkLogin(user){
         let result;
-        const sqlQuery=`SELECT * FROM "user" WHERE "email"=$1;`;
+        const sqlQuery=`SELECT "user".id, firstname, lastname, email , "password", birth_date,"label" AS "role" 
+        FROM "user" 
+        JOIN role ON role.id=role_id 
+        WHERE email=$1;`;
         const value=[user.email];
         try{
             const { rows: [foundUser] } = await dbClient.query(sqlQuery, value);
@@ -25,12 +28,13 @@ export default {
             const token = jwt.sign({email:foundUser.email}, process.env.SESSION_SECRET);
             const firstname=foundUser.firstname;
             const id = foundUser.id;
-            result ={logged:true,firstname,id,token};
-            
+            const role = foundUser.role;
+            result ={logged:true,id,firstname,role,token};
+            return result
         }
         catch(error){
             console.log('loginMapper Checklogin sql request - error : ', error);
-            throw 'erreur de BDD'
+            throw error
         }
-        return result
+        
     }}
