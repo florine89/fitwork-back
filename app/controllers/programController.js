@@ -21,7 +21,6 @@ export default{
         const articleId = req.params.id
         try{
             const postArticleInProgram = await programMapper.addToProgram(userId,articleId);
-            console.log(postArticleInProgram)
             if(!postArticleInProgram){
                 throw "Impossible de rajouter l'article au programme."
             }

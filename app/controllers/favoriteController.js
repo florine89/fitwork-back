@@ -21,7 +21,6 @@ export default{
         const articleId = req.params.id
         try{
             const postArticleInFavorite = await favoriteMapper.addToFavorite(userId,articleId);
-            console.log(postArticleInFavorite)
             if(!postArticleInFavorite){
                 throw "Impossible de rajouter l'article au Favoris."
             }

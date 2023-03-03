@@ -167,4 +167,6 @@ router.post('/article/:id/favorite', favoriteController.postArticleFavorite);
  */
 router.delete('/article/:id/favorite', favoriteController.deleteArticleFavorite);
 
+router.get('/articles', articleController.getAllArticles);
+router.get('/user/:id/articles', userController.getAllArticles);
 export default router;

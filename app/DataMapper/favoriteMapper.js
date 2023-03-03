@@ -3,7 +3,7 @@ import dbClient from '../service/dbClient.js'
 export default{
     async getFavorite (id){
         let result;
-        const sqlQuery= `SELECT favorite.id, article_id, status, title, description, "time", image, "type", "name" 
+        const sqlQuery= `SELECT favorite.id, article_id, title, description, "time", image, "type", "name" 
         FROM favorite  
         JOIN article ON article.id = article_id 
         JOIN category ON category.id=category_id
@@ -14,7 +14,7 @@ export default{
                 result = response.rows;
             }
             catch (error){
-            console.log('favoriteMapper getFavorite sql request - error : ', error);
+                console.log('favoriteMapper getFavorite sql request - error : ', error);
                 throw error
             }
             return result;
@@ -45,7 +45,7 @@ export default{
             }
             catch(error) {
                 console.log('deleteFromFavorite SQL -error : ', error);
-                console.log(error);
+
 
             }
         }
