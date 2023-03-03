@@ -12,12 +12,12 @@ export default{
             try {
                 const response = await dbClient.query(sqlQuery,value);
                 result = response.rows;
+                return result;
             }
             catch (error){
                 console.log('favoriteMapper getFavorite sql request - error : ', error);
                 throw error
             }
-            return result;
         },
 
         async addToFavorite (user_id,article_id) {
@@ -36,17 +36,14 @@ export default{
 
         async deleteFromFavorite (id) {
             const sqlQuery = `DELETE FROM favorite
-                            WHERE id=$1;`;
+                            WHERE article_id=$1;`;
             const values=[id];
             try{
                 await dbClient.query(sqlQuery,values);
                 return 'done';
-
             }
             catch(error) {
                 console.log('deleteFromFavorite SQL -error : ', error);
-
-
             }
         }
 };
