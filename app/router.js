@@ -6,6 +6,8 @@ import categoryController from './controllers/categoryController.js';
 import programController from './controllers/programController.js';
 import labelController from './controllers/labelController.js';
 import favoriteController from './controllers/favoriteController.js';
+import service from './service/security.js'
+import security from './service/security.js';
 
 const router = Router();
 /**
@@ -120,7 +122,7 @@ router.get('/categories', categoryController.getCategories);
  * @return {json} 200 - fichier de retour
  * @return {object} 500 - Unexpected error
  */
-router.get('/user/:id/program', programController.getUserProgram);
+router.get('/user/:id/program', security.checkToken, programController.getUserProgram);
 
 /**
  * Post /article/{id}/program
