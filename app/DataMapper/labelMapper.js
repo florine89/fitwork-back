@@ -18,14 +18,14 @@ export default{
 
     async getAllArticles(id){
         let result
-        const sqlQuery= `SELECT * FROM "article" WHERE category_id=$1;`;
+        const sqlQuery= `SELECT title,description,time,image,type,"name" category,user_id FROM "article" JOIN category ON category.id=category_id JOIN article_has_label al ON article.id=al.article_id WHERE al.label_id=$1;`;
         const value= [id];
         try {
             const response = await dbClient.query(sqlQuery,value);
             result = response.rows;
         } 
         catch (error){
-            console.log('articleMapper getAll sql request - error : ', error);
+            console.log('getAllArticles sql request - error : ', error);
             throw error
         }
         return result

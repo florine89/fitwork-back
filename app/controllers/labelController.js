@@ -18,11 +18,11 @@ export default{
 
     async getAllArticlesByLabels(req,res,next){
         try{
-            const labelsarticleLabel = await labelMapper.getAllArticles(req.params.id);
-            if (!labelsarticleLabel){
+            const articleWithLabel = await labelMapper.getAllArticles(req.params.id);
+            if (!articleWithLabel){
                 throw "Impossible de récupérer les articles de ce label."
             }
-            res.json(labelsarticleLabel);
+            res.json(articleWithLabel);
         }
         catch(error){
             console.log('getAllArticlesByLabels-error : ',error);
