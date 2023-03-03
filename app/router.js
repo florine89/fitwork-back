@@ -4,8 +4,8 @@ import userController from './controllers/userController.js';
 import articleController from './controllers/articleController.js';
 import categoryController from './controllers/categoryController.js';
 import programController from './controllers/programController.js';
+import labelController from './controllers/labelController.js';
 import favoriteController from './controllers/favoriteController.js';
-
 
 const router = Router();
 /**
@@ -140,6 +140,10 @@ router.post('/article/:id/program', programController.postArticleProgram);
  */
 router.delete('/article/:id/program', programController.deleteArticleProgram);
 
+router.get('/labels', labelController.getAllLabels);
+
+router.get('/labels/:id/articles', labelController.getAllArticlesByLabels);
+
 /**
  * GET /user/{id}/favorite
  * @summary liste les articles des favoris d'un utilisateur
@@ -169,4 +173,5 @@ router.delete('/article/:id/favorite', favoriteController.deleteArticleFavorite)
 
 router.get('/articles', articleController.getAllArticles);
 router.get('/user/:id/articles', userController.getAllArticles);
+
 export default router;
