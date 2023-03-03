@@ -66,7 +66,7 @@ router.post('/login', loginController.checkLogin);
  * @return {json} 200 - fichier de retour
  * @return {object} 500 - Unexpected error
  */
-router.get('/category/:id', articleController.getAllArticles);
+router.get('/category/:id', articleController.getArticlesByCategory);
 
 /**
  * POST /api/article/{id}
