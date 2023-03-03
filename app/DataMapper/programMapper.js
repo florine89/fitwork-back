@@ -14,7 +14,7 @@ export default{
                 result = response.rows;
             }
             catch (error){
-            console.log('programMapper getProgram sql request - error : ', error);
+                console.log('programMapper getProgram sql request - error : ', error);
                 throw error
             }
             return result;
@@ -45,7 +45,6 @@ export default{
             }
             catch(error) {
                 console.log('deleteFromProgram SQL -error : ', error);
-                console.log(error);
 
             }
         }
