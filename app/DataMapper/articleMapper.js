@@ -11,10 +11,31 @@ export default{
             result = response.rows;
         } 
         catch (error){
-            console.log('articleMapper getAll sql request - error : ', error);
+            console.log('articleMapper getAllById sql request - error : ', error);
             throw error
         }
         return result
+    },
+
+    async getAllArticles(){
+        const sqlQuery = `SELECT 
+        article.id, title, description, time, "type", image,
+        "name" AS category, 
+        firstname AS author_firstname, lastname AS author_lastname 
+        FROM article 
+        JOIN category ON category.id=category_id 
+        JOIN "user" ON "user".id=user_id;`
+        try{
+            const articles = await dbClient.query(sqlQuery);
+            if(!articles){
+                throw 'problème de lecture des articles'
+            }
+            return articles.rows;
+        }
+        catch(error){
+            console.log('articleMapper getAll SQL - error : ',error)
+            throw error
+        }
     },
     
     async getOne (id){
@@ -88,7 +109,6 @@ export default{
             if(!result){
                 throw 'echec de la suppression';
             }
-            console.log(result);
             return 'done';
         } catch (error){
             console.log('articleMapper deleteOne sql request - error : ', error);

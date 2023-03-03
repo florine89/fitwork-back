@@ -104,6 +104,26 @@ export default{
             console.log('userMapper deleteOne sql request - error : ', error);
             throw error
         }
+        },
+
+        async getAllArticles(user_id){
+            const sqlQuery = `SELECT 
+            article.id, title, description, time, "type", image,
+            "name" AS category  
+            FROM article 
+            JOIN category ON category.id=category_id WHERE user_id=$1;`;
+            const value = [user_id]
+            try{
+                const articles = await dbClient.query(sqlQuery,value);
+                if(!articles){
+                    throw 'problème de lecture des articles'
+                }
+                return articles.rows;
+            }
+            catch(error){
+                console.log('articleMapper getAll SQL - error : ',error)
+                throw error
+            }
         }
 
 }

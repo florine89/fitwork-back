@@ -4,6 +4,8 @@ import userController from './controllers/userController.js';
 import articleController from './controllers/articleController.js';
 import categoryController from './controllers/categoryController.js';
 import programController from './controllers/programController.js';
+import favoriteController from './controllers/favoriteController.js';
+
 
 const router = Router();
 /**
@@ -120,8 +122,51 @@ router.get('/categories', categoryController.getCategories);
  */
 router.get('/user/:id/program', programController.getUserProgram);
 
+/**
+ * Post /article/{id}/program
+ * @summary ajoute un article au programme d'un utilisateur 
+ * @tags program
+ * @return {json} 200 - fichier de retour
+ * @return {object} 500 - Unexpected error
+ */
 router.post('/article/:id/program', programController.postArticleProgram);
 
+/**
+ * DELETE /article/{id}/program
+ * @summary supprime un article du programme d'un utilisateur  
+ * @tags program
+ * @return {json} 200 - fichier de retour
+ * @return {object} 500 - Unexpected error
+ */
 router.delete('/article/:id/program', programController.deleteArticleProgram);
 
+/**
+ * GET /user/{id}/favorite
+ * @summary liste les articles des favoris d'un utilisateur
+ * @tags program
+ * @return {json} 200 - fichier de retour
+ * @return {object} 500 - Unexpected error
+ */
+router.get('/user/:id/favorite', favoriteController.getUserFavorite);
+
+/**
+ * Post /article/{id}/favorite
+ * @summary ajoute un article des favoris d'un utilisateur  
+ * @tags program
+ * @return {json} 200 - fichier de retour
+ * @return {object} 500 - Unexpected error
+ */
+router.post('/article/:id/favorite', favoriteController.postArticleFavorite);
+
+/**
+ * DELETE /article/{id}/favorite
+ * @summary supprime un article des favoris d'un utilisateur  
+ * @tags program
+ * @return {json} 200 - fichier de retour
+ * @return {object} 500 - Unexpected error
+ */
+router.delete('/article/:id/favorite', favoriteController.deleteArticleFavorite);
+
+router.get('/articles', articleController.getAllArticles);
+router.get('/user/:id/articles', userController.getAllArticles);
 export default router;
