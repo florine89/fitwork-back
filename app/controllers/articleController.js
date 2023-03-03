@@ -97,5 +97,18 @@ export default{
             console.log('deleteOneArticle no found article -error : ', error);
             next(error);
         }
+    },
+    async getAllArticles(_,res,next){
+        try {
+            const articles = await articleMapper.getAllArticles();
+            if (!articles){
+                next (new Error ("Pas d'article à présenter."));
+            }
+            res.json(articles);
+        }
+        catch(error){
+            console.log('getAllArticles no articles returned - error', error);
+            next(error);
+        }
     }
 }
