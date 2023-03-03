@@ -9,12 +9,13 @@ export default{
         try {
             const response = await dbClient.query(sqlQuery,value);
             result = response.rows;
+            return result
         } 
         catch (error){
             console.log('articleMapper getAllById sql request - error : ', error);
             throw error
         }
-        return result
+        
     },
 
     async getAllArticles(){

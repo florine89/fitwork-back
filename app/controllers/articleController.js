@@ -1,7 +1,7 @@
 import articleMapper from "../DataMapper/articleMapper.js";
 
 export default{
-    async getAllArticles(req,res,next) {
+    async getArticlesByCategory(req,res,next) {
         try{
             const articles = await articleMapper.getAll(req.params.id);
             if (!articles){
