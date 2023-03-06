@@ -3,7 +3,7 @@ import dbClient from '../service/dbClient.js'
 export default{
     async getProgram (id){
         let result;
-        const sqlQuery= `SELECT program.id, article_id, status, title, description, "time", image, "type", "name" 
+        const sqlQuery= `SELECT program.id AS program_id, article_id, status, title, description, "time", image, "type", "name" 
         FROM program  
         JOIN article ON article.id = article_id 
         JOIN category ON category.id=category_id
@@ -34,13 +34,13 @@ export default{
             }
         },
 
-        async deleteFromProgram (id) {
+        async deleteFromProgram (program_id) {
             const sqlQuery = `DELETE FROM "program"
                             WHERE id=$1;`;
-            const values=[id];
+            const values=[program_id];
             try{
                 await dbClient.query(sqlQuery,values);
-                return 'done';
+                return 'deleted';
 
             }
             catch(error) {
