@@ -122,7 +122,9 @@ router.get('/categories', categoryController.getCategories);
  * @return {json} 200 - fichier de retour
  * @return {object} 500 - Unexpected error
  */
+
 router.get('/user/:id/program',/* security.checkToken,*/ programController.getUserProgram);
+
 
 /**
  * Post /article/{id}/program
