@@ -34,11 +34,12 @@ export default{
     
     async deleteArticleProgram(req,res,next){
         try{
-            const deleted = await programMapper.deleteFromProgram(req.params.id);
-            if(deleted){
+            const deleted = await programMapper.deleteFromProgram(req.params.program_id);
+            console.log('deleted : ',deleted);
+            if(deleted !=="deleted"){
                 throw "Impossible de supprimer l'article au programme."
             }
-                res.json("deleted");
+                res.json(deleted);
             }
         catch(error) {
             console.log('deleteUSerProgram-error : ', error);
