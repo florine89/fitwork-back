@@ -4,7 +4,7 @@ TRUNCATE category, article CASCADE;
 
 INSERT INTO
     "category"("name")
-VALUES ('Exercie au bureau'),
+VALUES ('Exercice au bureau'),
     ('Bien être au bureau');
 -- ---------------------------------------------------------------------
 INSERT INTO
