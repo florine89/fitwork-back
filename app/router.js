@@ -173,7 +173,7 @@ router.post('/article/:id/favorite', favoriteController.postArticleFavorite);
  * @return {json} 200 - fichier de retour
  * @return {object} 500 - Unexpected error
  */
-router.delete('/favorite/:favorite_id', favoriteController.deleteArticleFavorite);
+router.delete('/article/:id/favorite', favoriteController.deleteArticleFavorite);
 
 router.get('/articles', articleController.getAllArticles);
 router.get('/user/:id/articles', userController.getAllArticles);

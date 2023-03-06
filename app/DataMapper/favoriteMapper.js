@@ -40,7 +40,7 @@ export default{
             const values=[id];
             try{
                 await dbClient.query(sqlQuery,values);
-                return 'deleted';
+                return 'Favoris supprimé';
             }
             catch(error) {
                 console.log('deleteFromFavorite SQL -error : ', error);
