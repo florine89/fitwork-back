@@ -2,7 +2,7 @@
 
 BEGIN;
 
-ALTER TABLE "program"
+ALTER TABLE "favorite"
 DROP COLUMN IF EXISTS id;
 
 

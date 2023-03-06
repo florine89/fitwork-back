@@ -7,3 +7,4 @@
 4.cascade_article 2023-03-01T13:24:03Z Anthalius <Anthalius@Mortefleur> # adding ON DELETE CASCADE on article_id tables favorite and program
 5.add_program_id 2023-03-02T13:28:55Z Anthalius <Anthalius@Mortefleur> # adding an id to program table to allow deletion of 1 specific article for a given user
 6.add_favorite_id 2023-03-03T09:48:03Z Anthalius <Anthalius@Mortefleur> # adding id to Favorite table
+7.populate2 2023-03-06T13:52:45Z Etudiant O'clock <student@teleporter> # populate 2
