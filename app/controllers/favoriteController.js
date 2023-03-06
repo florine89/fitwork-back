@@ -34,8 +34,8 @@ export default{
     
     async deleteArticleFavorite(req,res,next){
         try{
-            const deleted = await favoriteMapper.deleteFromFavorite(req.params.id);
-            if(!deleted){
+            const deleted = await favoriteMapper.deleteFromFavorite(req.params.favorite_id);
+            if(deleted !== "deleted"){
                 throw "Impossible de supprimer l'article au Favoris."
             }
                 res.json("deleted");

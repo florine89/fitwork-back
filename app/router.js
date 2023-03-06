@@ -122,7 +122,9 @@ router.get('/categories', categoryController.getCategories);
  * @return {json} 200 - fichier de retour
  * @return {object} 500 - Unexpected error
  */
-router.get('/user/:id/program', programController.getUserProgram);
+
+router.get('/user/:id/program',/* security.checkToken,*/ programController.getUserProgram);
+
 
 /**
  * Post /article/{id}/program
@@ -140,7 +142,7 @@ router.post('/article/:id/program', programController.postArticleProgram);
  * @return {json} 200 - fichier de retour
  * @return {object} 500 - Unexpected error
  */
-router.delete('/article/:id/program', programController.deleteArticleProgram);
+router.delete('/program/:program_id', programController.deleteArticleProgram);
 
 router.get('/labels', labelController.getAllLabels);
 
@@ -171,7 +173,7 @@ router.post('/article/:id/favorite', favoriteController.postArticleFavorite);
  * @return {json} 200 - fichier de retour
  * @return {object} 500 - Unexpected error
  */
-router.delete('/article/:id/favorite', favoriteController.deleteArticleFavorite);
+router.delete('/favorite/:favorite_id', favoriteController.deleteArticleFavorite);
 
 router.get('/articles', articleController.getAllArticles);
 router.get('/user/:id/articles', userController.getAllArticles);
