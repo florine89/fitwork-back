@@ -1,5 +1,6 @@
 import articleMapper from "../DataMapper/articleMapper.js";
-
+import fs from 'fs';
+import path from 'path';
 export default{
     async getArticlesByCategory(req,res,next) {
         try{
@@ -21,6 +22,10 @@ export default{
             if (!article){
                 throw 'article non trouvé';
             }
+            const imagePath = path.join(`./images/${article.image}`);
+            const image= fs.readFileSync(imagePath);
+            const base64Image = Buffer.from(image).toString('base64');
+            article.image= base64Image
             res.json(article);
         }
         catch(error){
