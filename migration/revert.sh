@@ -6,5 +6,5 @@ export PGHOST=localhost
 #sqitch revert 3.delete+gender
 #sqitch revert 4.cascade_article
 #sqitch revert 5.add_program_id
-sqitch deploy 6.add_favorite_id
-#sqitch deploy 7.populate2
+#sqitch revert 6.add_favorite_id
+sqitch revert 7.populate2
