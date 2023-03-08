@@ -144,6 +144,8 @@ router.post('/article/:id/program', programController.postArticleProgram);
  */
 router.delete('/program/:program_id', programController.deleteArticleProgram);
 
+router.patch('/program/:id', programController.validateProgram);
+
 router.get('/labels', labelController.getAllLabels);
 
 router.get('/labels/:id/articles', labelController.getAllArticlesByLabels);
@@ -177,5 +179,6 @@ router.delete('/article/:id/favorite', favoriteController.deleteArticleFavorite)
 
 router.get('/articles', articleController.getAllArticles);
 router.get('/user/:id/articles', userController.getAllArticles);
+
 
 export default router;
