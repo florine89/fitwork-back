@@ -70,7 +70,7 @@ router.post('/login', loginController.checkLogin);
  */
 router.get('/category/:id', articleController.getArticlesByCategory);
 
-router.get('article/:id/image', imageController.getImage);
+router.get('/article/:id/image', imageController.getImage);
 
 
 /**
