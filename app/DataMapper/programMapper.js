@@ -51,7 +51,7 @@ export default{
         async complete(program_id,user_id){
             const sql = `
                 UPDATE program
-                SET status = true
+                SET status = (CASE WHEN status = FALSE THEN TRUE ELSE FALSE END)
                 WHERE id=$1 AND user_id=$2 RETURNING *;`;
             const values = [program_id,user_id];
             const result = await dbClient.query(sql, values);
