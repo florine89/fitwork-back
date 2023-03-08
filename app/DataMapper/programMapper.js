@@ -48,13 +48,12 @@ export default{
 
             }
         },
-        async complete(id){
+        async complete(program_id,user_id){
             const sql = `
                 UPDATE program
                 SET status = true
-                WHERE id=$1
-                RETURNING *;`;
-            const values = [id];
+                WHERE id=$1 AND user_id=$2 RETURNING *;`;
+            const values = [program_id,user_id];
             const result = await dbClient.query(sql, values);
             return result.rows[0];
         }
