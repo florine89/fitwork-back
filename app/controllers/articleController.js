@@ -22,10 +22,6 @@ export default{
             if (!article){
                 throw 'article non trouvé';
             }
-            const imagePath = path.join(`./images/${article.image}`);
-            const image= fs.readFileSync(imagePath);
-            const base64Image = Buffer.from(image).toString('base64');
-            article.image= base64Image
             res.json(article);
         }
         catch(error){
