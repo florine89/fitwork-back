@@ -45,6 +45,19 @@ export default{
             console.log('deleteUSerProgram-error : ', error);
             next (error);
         }
+    },
+    async validateProgram(req, res, next){
+        try {
+            const validProgram = await programMapper.complete(req.params.id);
+            if(!validProgram){
+                throw "Impossible de valider l'activité.";
+            }
+            res.json(validProgram)
+        }
+        catch(error){
+            console.log('validateProgram-error : ', error);
+            next (error);
+        }
     }
 }
 

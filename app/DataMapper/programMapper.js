@@ -47,5 +47,15 @@ export default{
                 console.log('deleteFromProgram SQL -error : ', error);
 
             }
+        },
+        async complete(id){
+            const sql = `
+                UPDATE program
+                SET status = true
+                WHERE id=$1
+                RETURNING *;`;
+            const values = [id];
+            const result = await dbClient.query(sql, values);
+            return result.rows[0];
         }
 };
