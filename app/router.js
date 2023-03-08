@@ -6,7 +6,7 @@ import categoryController from './controllers/categoryController.js';
 import programController from './controllers/programController.js';
 import labelController from './controllers/labelController.js';
 import favoriteController from './controllers/favoriteController.js';
-import service from './service/security.js'
+import imageController from './controllers/imageController.js'
 import security from './service/security.js';
 
 const router = Router();
@@ -70,6 +70,9 @@ router.post('/login', loginController.checkLogin);
  */
 router.get('/category/:id', articleController.getArticlesByCategory);
 
+router.get('article/:id/image', imageController.getImage);
+
+
 /**
  * POST /api/article/{id}
  * @summary Renvoie un article
@@ -83,7 +86,6 @@ router.get('/article/:id', articleController.getOneArticle);
 
 router.delete('/article/:id', articleController.deleteOneArticle);
 
-
 /**
  * POST /article/{id}
  * @summary modifie un article
@@ -93,6 +95,7 @@ router.delete('/article/:id', articleController.deleteOneArticle);
  * @return {object} 500 - Unexpected error
  */
 router.patch('/article/:id', articleController.updateOneArticle)
+
 
 
 /**
