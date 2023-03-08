@@ -47,8 +47,10 @@ export default{
         }
     },
     async validateProgram(req, res, next){
+        const user_id= req.body.user_id;
+
         try {
-            const validProgram = await programMapper.complete(req.params.id);
+            const validProgram = await programMapper.complete(req.params.id,user_id);
             if(!validProgram){
                 throw "Impossible de valider l'activité.";
             }
