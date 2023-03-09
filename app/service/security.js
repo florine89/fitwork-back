@@ -25,9 +25,9 @@ export default {
             try{
                 const foundUser = await userMapper.selectOne(user.user_id);
                 const firstname=foundUser.firstname;
-                const user_id = foundUser.id;
+                const id = foundUser.id;
                 const role_id = foundUser.role_id;
-                result ={logged:true,user_id,firstname,role_id};
+                result ={logged:true,id,firstname,role_id};
                 res.json(result)
             }
             catch(error){
