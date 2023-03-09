@@ -1,5 +1,6 @@
-import  dbClient  from"../service/dbClient.js";
-import bcrypt from "bcryptjs"
+import  dbClient  from '../service/dbClient.js';
+import bcrypt from 'bcryptjs';
+import dayjs from 'dayjs';
 
 export default{
  /**
@@ -13,6 +14,7 @@ export default{
     try {
         const response = await dbClient.query (sqlQuery,value);
         result = response.rows[0];
+        result.birth_date = dayjs(result.birth_date).format('YYYY-MM-DD');
     } 
     catch (error){
         console.log('userMapper selectOne sql request - error : ', error);
