@@ -27,7 +27,7 @@ export default {
                 const firstname=foundUser.firstname;
                 const id = foundUser.id;
                 const role_id = foundUser.role_id;
-                result ={logged:true,user_id,firstname,role_id};
+                result ={logged:true,id,firstname,role_id};
                 res.json(result)
             }
             catch(error){
