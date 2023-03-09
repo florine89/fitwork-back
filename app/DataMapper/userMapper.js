@@ -9,7 +9,7 @@ export default{
      */
     async selectOne(id){
         let result;
-        const sqlQuery= `SELECT * FROM "user" WHERE id=$1;`;
+        const sqlQuery= `SELECT * FROM "user" JOIN "role" ON role.id=role_id WHERE "user".id=$1;`;
         const value= [id];
     try {
         const response = await dbClient.query (sqlQuery,value);
