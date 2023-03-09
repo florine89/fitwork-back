@@ -73,10 +73,13 @@ export default{
     },
 
     async deleteOneArticle(req,res,next){
+        console.log(req.params.id, "params")
+        console.log(req.body.id, "body")
         try{
             const foundArticle = await articleMapper.getOne(req.params.id);
             if(!foundArticle){
                 next(new Error(`l'article n'existe pas`))
+                return;
             }
             if (foundArticle.user_id !== req.body.user_id){
                 next(new Error(`Vous n'êtes pas l'auteur, vous ne pouvez pas supprimer cet article`))
@@ -92,11 +95,13 @@ export default{
             catch(error){
                 console.log('deleteOneArticle no deleted article - error : ', error)
                 next(error)
+                return;
             }
         }
         catch(error){
             console.log('deleteOneArticle no found article -error : ', error);
             next(error);
+            return;
         }
     },
     async getAllArticles(_,res,next){
