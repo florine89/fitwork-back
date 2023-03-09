@@ -22,7 +22,7 @@ export default{
         try{
             const postArticleInFavorite = await favoriteMapper.addToFavorite(userId,articleId);
             if(!postArticleInFavorite){
-                throw "Impossible de rajouter l'article au Favoris."
+                res.json("Impossible de rajouter l'article au Favoris.")
             }
                 res.json(postArticleInFavorite);
             }
