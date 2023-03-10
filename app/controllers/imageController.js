@@ -7,9 +7,9 @@ export default{
                 const foundImage = await imageMapper.getImageFromId(req.params.id);
                 const directoryPath = './images/';
                 if (!foundImage){
-                    res.download(directoryPath, 'default.png')
+                    console.log("erreur de récupération de l'image ! ");
                 }
-                res.download(directoryPath + foundImage.image, foundImage.image)
+                res.download(directoryPath + foundImage.image, foundImage.image);
             }
             catch(error){
                 // console.log('image upload - error : ',error);
