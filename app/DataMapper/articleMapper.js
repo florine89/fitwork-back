@@ -61,9 +61,6 @@ export default{
         const sqlQuery = `INSERT INTO "article" 
                         ("title","description","time","image","type","category_id","user_id","created_at") 
                         VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING title, description, time, image, type, category_id, user_id;`;
-        if(body.image == NULL){
-            body.image="default.png"
-        };
         console.log("body.image",body.image);
         const values=[body.title,
             body.description,
