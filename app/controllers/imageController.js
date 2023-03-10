@@ -5,15 +5,15 @@ export default{
             try {
                 ;
                 const foundImage = await imageMapper.getImageFromId(req.params.id);
-                if (!foundImage){
-                    throw 'article non trouvé';
-                }
                 const directoryPath = './images/';
-                res.download(directoryPath + foundImage.image, foundImage.image)
+                if (!foundImage){
+                    console.log("erreur de récupération de l'image ! ");
+                }
+                res.download(directoryPath + foundImage.image, foundImage.image);
             }
             catch(error){
-                console.log('image upload - error : ',error);
-                next(error)
+                // console.log('image upload - error : ',error);
+                // next(error)
             }
         }
 }
