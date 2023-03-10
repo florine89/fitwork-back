@@ -3,7 +3,7 @@ import dbClient from '../service/dbClient.js'
 export default{
     async getFavorite (id){
         let result;
-        const sqlQuery= `SELECT favorite.id AS favorite_id, article_id, title, description, "time", image, "type", "name" 
+        const sqlQuery= `SELECT  article_id, title, description, "time", image, "type", "name" 
         FROM favorite  
         JOIN article ON article.id = article_id 
         JOIN category ON category.id=category_id

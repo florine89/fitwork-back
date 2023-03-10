@@ -6,7 +6,7 @@ export default{
         try{
             const foundFavorite = await favoriteMapper.getFavorite(req.params.id);
             if(!foundFavorite){
-                throw "Le Favoriteme est vide."
+                throw "La liste de favoris est vide."
             }
                 res.json(foundFavorite);
             }
