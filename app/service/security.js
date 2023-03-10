@@ -18,7 +18,8 @@ export default {
     async readToken(req, res, next) {
         let result;
         try {
-            const user = jwt.verify(req.body.token, process.env.SESSION_SECRET);
+            console.log(req.headers.authorization);
+            const user = jwt.verify(req.headers.authorization, process.env.SESSION_SECRET);
             if (!user){
                 res.json(`problème d'identité`)
             };
