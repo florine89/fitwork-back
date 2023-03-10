@@ -12,5 +12,3 @@ psql -f init_db.sql -d postgres
 ## on attache sqitch au projet
 sqitch init fitwork --engine pg --target db:pg:fitwork
 
-psql -U fitwork_admin -d fitwork -f deploy/1.create_tables.sql
-psql -U fitwork_admin -d fitwork -f deploy/2.populate.sql
