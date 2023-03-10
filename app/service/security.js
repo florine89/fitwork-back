@@ -19,7 +19,8 @@ export default {
         let result;
         try {
             console.log(req.headers.authorization);
-            const user = jwt.verify(req.headers.authorization, process.env.SESSION_SECRET);
+            const token = req.headers.authorization.split(' ')[1]; 
+            const user = jwt.verify(token, process.env.SESSION_SECRET);
             if (!user){
                 res.json(`problème d'identité`)
             };
