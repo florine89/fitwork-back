@@ -1,9 +1,9 @@
--- Revert fitwork:1.create_tables from pg
+-- Revert fitwork:2.populate from pg
 
 BEGIN;
 
-DROP TABLE
-    IF EXISTS article,
+TRUNCATE TABLE
+    article,
     category,
     label,
     role,
@@ -11,5 +11,5 @@ DROP TABLE
     favorite,-- association table for user_like_article
     program,-- association table  for user_programs_article
     article_has_label;
-    
+
 COMMIT;
