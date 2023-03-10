@@ -6,8 +6,8 @@ export default{
         const value = [id]
         try{
             const image =await dbClient.query(sqlQuery, value);
-            if (!image){
-                throw "Aucune image n'a été trouvée."
+            if (!image.rows[0].image){
+                image.rows= [ { image: 'default.png' } ]
             }
             return image.rows[0];
     }
