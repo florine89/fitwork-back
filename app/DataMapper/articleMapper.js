@@ -60,7 +60,7 @@ export default{
         
         const sqlQuery = `INSERT INTO "article" 
                         ("title","description","time","image","type","category_id","user_id","created_at") 
-                        VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING title, description, time, image, type, category_id, user_id;`;
+                        VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING id,title, description, time, image, type, category_id, user_id;`;
         console.log("body.image",body.image);
         const values=[body.title,
             body.description,
@@ -90,7 +90,7 @@ export default{
                         "type" = COALESCE($5, type),
                         "category_id" = COALESCE($6, category_id),
                         "updated_at" = now()
-                        WHERE id=$7::int RETURNING title,description,time,image,type,category_id,updated_at;`
+                        WHERE id=$7::int RETURNING id,title,description,time,image,type,category_id,updated_at;`
         const values =[body.title,body.description,body.time,body.image,body.type,body.category_id,id];
         try{
             const response = await dbClient.query(sqlQuery,values);
