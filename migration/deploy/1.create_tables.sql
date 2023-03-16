@@ -98,6 +98,7 @@ CREATE TABLE
         -- id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
         user_id INTEGER REFERENCES "user"(id) ON DELETE CASCADE,
         article_id INTEGER REFERENCES article(id)ON DELETE CASCADE,
+        -- pour que le favori soit unique avec cetuser_id et cet article_id
         CONSTRAINT unicity_like UNIQUE (user_id,article_id)
     );
 
@@ -131,6 +132,8 @@ CREATE TABLE
         CONSTRAINT label_unicity UNIQUE(article_id,label_id)
     );
 
+-- ça sert a modifier une table existante, car il faut respecter un ordre dans la création des tables, du coup on ajoute après
+-- on delete cascade ça permet de supprimer l'article partout ou il est referencé, ou on peut le trouver
 ALTER TABLE article ADD FOREIGN KEY (category_id) REFERENCES category(id) ON DELETE CASCADE;
 ALTER TABLE article ADD FOREIGN KEY (user_id) REFERENCES "user"(id) ON DELETE CASCADE;
 ALTER TABLE "user" ADD FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE CASCADE;

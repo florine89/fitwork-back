@@ -1,3 +1,6 @@
+// le dataMapper fait des requêtes SQL 
+
+//fichier dans service qui permer de faire appel à la base de données
 import  dbClient  from"../service/dbClient.js";
 
 

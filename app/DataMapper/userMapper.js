@@ -1,3 +1,6 @@
+// toute la gestion de l'utilisateur se passe içi
+
+
 import  dbClient  from '../service/dbClient.js';
 import bcrypt from 'bcryptjs';
 import dayjs from 'dayjs';
@@ -50,6 +53,8 @@ export default{
      * @param {text} password
      * @param {integer} role_id
      */
+
+    //ici c'est la création d'un utilisateur
     async insert (user){
         try{
             const foundUser = await this.findOneByEmail(user.email)

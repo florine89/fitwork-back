@@ -1,4 +1,4 @@
-## on commence par s'identifier en tant que superAdmin postgres
+## on commence par s'identifier en tant que superAdmin postgres, les identifiants :
 export PGUSER=postgres
 export PGHOST=localhost
 
