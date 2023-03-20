@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import userMapper from '../DataMapper/userMapper.js'
 export default {
+    //on verifie le token içi
     checkToken(req, res, next) {
         try {
  

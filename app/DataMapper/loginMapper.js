@@ -25,6 +25,9 @@ export default {
             if (!isValidPassword){
                 throw'Email ou mot de passe incorrect';
             };
+            //sign et jwt fonction qui permet de créer le token, ca permet de valider les informations 
+            //process.env.sessionsecret permet de faire le chiffrement du token
+            //et expires in qui fait que le token devient invalide
             const token = jwt.sign({email:foundUser.email,user_id:foundUser.id}, process.env.SESSION_SECRET,{expiresIn: '1d'});
             const firstname=foundUser.firstname;
             const id = foundUser.id;
